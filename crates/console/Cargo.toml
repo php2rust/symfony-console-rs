@@ -1,0 +1,17 @@
+[package]
+name = "symfony-console"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "The parts of Symfony Console that the Yaml and Dotenv commands use (M1-B)"
+
+[dependencies]
+php-value = { path = "../php-value" }
+symfony-string = { path = "../string" }
+symfony-deprecation-contracts = { path = "../deprecation-contracts" }
+fancy-regex = "0.20.2"
+
+[dev-dependencies]
+php-value = { path = "../php-value", features = ["vectors"] }
+serde_json = "1.0.154"
