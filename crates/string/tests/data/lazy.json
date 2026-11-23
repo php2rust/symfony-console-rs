@@ -1,0 +1,837 @@
+{
+    "cases": [
+        [
+            "returns int",
+            [
+                "string",
+                "42"
+            ]
+        ],
+        [
+            "returns negative int",
+            [
+                "string",
+                "-7"
+            ]
+        ],
+        [
+            "returns int max",
+            [
+                "string",
+                "9223372036854775807"
+            ]
+        ],
+        [
+            "returns float",
+            [
+                "string",
+                "123.456"
+            ]
+        ],
+        [
+            "returns float 0.1+0.2",
+            [
+                "string",
+                "0.3"
+            ]
+        ],
+        [
+            "returns float 1e100",
+            [
+                "string",
+                "1.0E+100"
+            ]
+        ],
+        [
+            "returns float 1e15",
+            [
+                "string",
+                "1.0E+15"
+            ]
+        ],
+        [
+            "returns float 1/3",
+            [
+                "string",
+                "0.33333333333333"
+            ]
+        ],
+        [
+            "returns float 1e14",
+            [
+                "string",
+                "1.0E+14"
+            ]
+        ],
+        [
+            "returns float -1.5e-7",
+            [
+                "string",
+                "-1.5E-7"
+            ]
+        ],
+        [
+            "returns float -0.0",
+            [
+                "string",
+                "-0"
+            ]
+        ],
+        [
+            "returns float 1.0",
+            [
+                "string",
+                "1"
+            ]
+        ],
+        [
+            "returns float INF",
+            [
+                "string",
+                "INF"
+            ]
+        ],
+        [
+            "returns float NAN",
+            [
+                "string",
+                "NAN"
+            ]
+        ],
+        [
+            "returns true",
+            [
+                "string",
+                "1"
+            ]
+        ],
+        [
+            "returns false",
+            [
+                "string",
+                ""
+            ]
+        ],
+        [
+            "returns null",
+            [
+                "string",
+                ""
+            ]
+        ],
+        [
+            "returns empty string",
+            [
+                "string",
+                ""
+            ]
+        ],
+        [
+            "returns string",
+            [
+                "string",
+                "abc"
+            ]
+        ],
+        [
+            "returns array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of {closure:{closure:FILE:98}:98}() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "returns list",
+            [
+                "throws",
+                "TypeError",
+                "Return value of {closure:{closure:FILE:98}:98}() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "returns stdClass",
+            [
+                "throws",
+                "TypeError",
+                "Return value of {closure:{closure:FILE:98}:98}() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, stdClass returned."
+            ]
+        ],
+        [
+            "returns Stringable",
+            [
+                "string",
+                "stringable"
+            ]
+        ],
+        [
+            "returns enum",
+            [
+                "throws",
+                "TypeError",
+                "Return value of {closure:{closure:FILE:98}:98}() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, Suit returned."
+            ]
+        ],
+        [
+            "returns LazyString",
+            [
+                "string",
+                "inner"
+            ]
+        ],
+        [
+            "string callable returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of returns_array() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "static method string returning string",
+            [
+                "string",
+                "made"
+            ]
+        ],
+        [
+            "array callable returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of Named::method() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "static array callable",
+            [
+                "string",
+                "made"
+            ]
+        ],
+        [
+            "first-class method callable returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of Named::method() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "first-class function callable returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of returns_array() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "invokable object returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of Named::__invoke() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "lazy callable returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of Named::__invoke() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "lazy callable with method returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of Named::method() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "lazy callable with method returning string",
+            [
+                "string",
+                "text"
+            ]
+        ],
+        [
+            "lazy callable invokable",
+            [
+                "string",
+                "invoked 1"
+            ]
+        ],
+        [
+            "lazy callable with arguments",
+            [
+                "string",
+                "other arg"
+            ]
+        ],
+        [
+            "lazy callable with an undefined method",
+            [
+                "throws",
+                "Error",
+                "Call to undefined method Invokable::missing()"
+            ]
+        ],
+        [
+            "lazy callable factory returning a string",
+            [
+                "throws",
+                "Error",
+                "Class \"strtoupper\" not found"
+            ]
+        ],
+        [
+            "callable with arguments",
+            [
+                "string",
+                "a-b"
+            ]
+        ],
+        [
+            "callable with arguments returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of str_split() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "Closure::fromCallable of a function returning array",
+            [
+                "throws",
+                "TypeError",
+                "Return value of returns_array() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "exception from the callback",
+            [
+                "throws",
+                "RuntimeException",
+                "boom"
+            ]
+        ],
+        [
+            "TypeError from the callback",
+            [
+                "throws",
+                "TypeError",
+                "own"
+            ]
+        ],
+        [
+            "fromCallable empty array",
+            [
+                "throws",
+                "TypeError",
+                "Argument 1 passed to \"Symfony\\Component\\String\\LazyString::fromCallable()\" must be a callable or a [Closure, method] lazy-callable, \"[]\" given."
+            ]
+        ],
+        [
+            "fromCallable string list",
+            [
+                "throws",
+                "TypeError",
+                "Argument 1 passed to \"Symfony\\Component\\String\\LazyString::fromCallable()\" must be a callable or a [Closure, method] lazy-callable, \"[string]\" given."
+            ]
+        ],
+        [
+            "fromCallable ints",
+            [
+                "throws",
+                "TypeError",
+                "Argument 1 passed to \"Symfony\\Component\\String\\LazyString::fromCallable()\" must be a callable or a [Closure, method] lazy-callable, \"[int, int]\" given."
+            ]
+        ],
+        [
+            "fromCallable object and method",
+            [
+                "throws",
+                "TypeError",
+                "Argument 1 passed to \"Symfony\\Component\\String\\LazyString::fromCallable()\" must be a callable or a [Closure, method] lazy-callable, \"[stdClass, string]\" given."
+            ]
+        ],
+        [
+            "fromCallable null",
+            [
+                "throws",
+                "TypeError",
+                "Argument 1 passed to \"Symfony\\Component\\String\\LazyString::fromCallable()\" must be a callable or a [Closure, method] lazy-callable, \"[null]\" given."
+            ]
+        ],
+        [
+            "fromCallable nested array",
+            [
+                "throws",
+                "TypeError",
+                "Argument 1 passed to \"Symfony\\Component\\String\\LazyString::fromCallable()\" must be a callable or a [Closure, method] lazy-callable, \"[array, string]\" given."
+            ]
+        ],
+        [
+            "fromCallable three ints",
+            [
+                "throws",
+                "Error",
+                "Value of type int is not callable"
+            ]
+        ],
+        [
+            "fromCallable Closure and int",
+            [
+                "throws",
+                "Error",
+                "Second array member is not a valid method"
+            ]
+        ],
+        [
+            "fromCallable bool and float",
+            [
+                "throws",
+                "TypeError",
+                "Argument 1 passed to \"Symfony\\Component\\String\\LazyString::fromCallable()\" must be a callable or a [Closure, method] lazy-callable, \"[bool, float]\" given."
+            ]
+        ],
+        [
+            "memoized first",
+            [
+                "string",
+                "call 1"
+            ]
+        ],
+        [
+            "memoized second",
+            [
+                "string",
+                "call 1"
+            ]
+        ],
+        [
+            "retry first",
+            [
+                "throws",
+                "RuntimeException",
+                "first try"
+            ]
+        ],
+        [
+            "retry second",
+            [
+                "string",
+                "try 2"
+            ]
+        ],
+        [
+            "retry third",
+            [
+                "string",
+                "try 2"
+            ]
+        ],
+        [
+            "type error first",
+            [
+                "throws",
+                "TypeError",
+                "Return value of {closure:FILE:154}() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "type error second",
+            [
+                "throws",
+                "TypeError",
+                "Return value of {closure:FILE:154}() passed to Symfony\\Component\\String\\LazyString::fromCallable() must be of the type string, array returned."
+            ]
+        ],
+        [
+            "type error callback calls",
+            [
+                "string",
+                "1"
+            ]
+        ],
+        [
+            "lazy factory memoized first",
+            [
+                "string",
+                "invoked 1"
+            ]
+        ],
+        [
+            "lazy factory memoized second",
+            [
+                "string",
+                "invoked 1"
+            ]
+        ],
+        [
+            "lazy factory, invoke throws first",
+            [
+                "throws",
+                "RuntimeException",
+                "invoke failed"
+            ]
+        ],
+        [
+            "lazy factory, invoke throws second",
+            [
+                "string",
+                "invoke 2"
+            ]
+        ],
+        [
+            "lazy factory calls",
+            [
+                "string",
+                "1"
+            ]
+        ],
+        [
+            "fromStringable string",
+            [
+                "string",
+                "abc"
+            ]
+        ],
+        [
+            "resolve string",
+            [
+                "string",
+                "abc"
+            ]
+        ],
+        [
+            "fromStringable int",
+            [
+                "string",
+                "123"
+            ]
+        ],
+        [
+            "resolve int",
+            [
+                "string",
+                "123"
+            ]
+        ],
+        [
+            "fromStringable float",
+            [
+                "string",
+                "123.456"
+            ]
+        ],
+        [
+            "resolve float",
+            [
+                "string",
+                "123.456"
+            ]
+        ],
+        [
+            "fromStringable true",
+            [
+                "string",
+                "1"
+            ]
+        ],
+        [
+            "resolve true",
+            [
+                "string",
+                "1"
+            ]
+        ],
+        [
+            "fromStringable false",
+            [
+                "string",
+                ""
+            ]
+        ],
+        [
+            "resolve false",
+            [
+                "string",
+                ""
+            ]
+        ],
+        [
+            "fromStringable float 1e100",
+            [
+                "string",
+                "1.0E+100"
+            ]
+        ],
+        [
+            "resolve float 1e100",
+            [
+                "string",
+                "1.0E+100"
+            ]
+        ],
+        [
+            "fromStringable float 0.1+0.2",
+            [
+                "string",
+                "0.3"
+            ]
+        ],
+        [
+            "resolve float 0.1+0.2",
+            [
+                "string",
+                "0.3"
+            ]
+        ],
+        [
+            "fromStringable float 1/3",
+            [
+                "string",
+                "0.33333333333333"
+            ]
+        ],
+        [
+            "resolve float 1/3",
+            [
+                "string",
+                "0.33333333333333"
+            ]
+        ],
+        [
+            "fromStringable float 1e14",
+            [
+                "string",
+                "1.0E+14"
+            ]
+        ],
+        [
+            "resolve float 1e14",
+            [
+                "string",
+                "1.0E+14"
+            ]
+        ],
+        [
+            "fromStringable float 0.00001",
+            [
+                "string",
+                "1.0E-5"
+            ]
+        ],
+        [
+            "resolve float 0.00001",
+            [
+                "string",
+                "1.0E-5"
+            ]
+        ],
+        [
+            "fromStringable float -0.0",
+            [
+                "string",
+                "-0"
+            ]
+        ],
+        [
+            "resolve float -0.0",
+            [
+                "string",
+                "-0"
+            ]
+        ],
+        [
+            "fromStringable Stringable",
+            [
+                "string",
+                "text"
+            ]
+        ],
+        [
+            "resolve Stringable",
+            [
+                "string",
+                "text"
+            ]
+        ],
+        [
+            "fromStringable LazyString",
+            [
+                "string",
+                "lazy"
+            ]
+        ],
+        [
+            "resolve LazyString",
+            [
+                "string",
+                "lazy"
+            ]
+        ],
+        [
+            "fromStringable null",
+            [
+                "throws",
+                "TypeError",
+                "Symfony\\Component\\String\\LazyString::fromStringable(): Argument #1 ($value) must be of type Stringable|string|int|float|bool, null given, called in FILE on line 194"
+            ]
+        ],
+        [
+            "resolve null",
+            [
+                "throws",
+                "TypeError",
+                "Symfony\\Component\\String\\LazyString::resolve(): Argument #1 ($value) must be of type Stringable|string|int|float|bool, null given, called in FILE on line 195"
+            ]
+        ],
+        [
+            "fromStringable array",
+            [
+                "throws",
+                "TypeError",
+                "Symfony\\Component\\String\\LazyString::fromStringable(): Argument #1 ($value) must be of type Stringable|string|int|float|bool, array given, called in FILE on line 194"
+            ]
+        ],
+        [
+            "resolve array",
+            [
+                "throws",
+                "TypeError",
+                "Symfony\\Component\\String\\LazyString::resolve(): Argument #1 ($value) must be of type Stringable|string|int|float|bool, array given, called in FILE on line 195"
+            ]
+        ],
+        [
+            "fromStringable stdClass",
+            [
+                "throws",
+                "TypeError",
+                "Symfony\\Component\\String\\LazyString::fromStringable(): Argument #1 ($value) must be of type Stringable|string|int|float|bool, stdClass given, called in FILE on line 194"
+            ]
+        ],
+        [
+            "resolve stdClass",
+            [
+                "throws",
+                "TypeError",
+                "Symfony\\Component\\String\\LazyString::resolve(): Argument #1 ($value) must be of type Stringable|string|int|float|bool, stdClass given, called in FILE on line 195"
+            ]
+        ],
+        [
+            "fromStringable enum",
+            [
+                "throws",
+                "TypeError",
+                "Symfony\\Component\\String\\LazyString::fromStringable(): Argument #1 ($value) must be of type Stringable|string|int|float|bool, Suit given, called in FILE on line 194"
+            ]
+        ],
+        [
+            "resolve enum",
+            [
+                "throws",
+                "TypeError",
+                "Symfony\\Component\\String\\LazyString::resolve(): Argument #1 ($value) must be of type Stringable|string|int|float|bool, Suit given, called in FILE on line 195"
+            ]
+        ]
+    ],
+    "isStringable": [
+        [
+            "string",
+            true
+        ],
+        [
+            "empty string",
+            true
+        ],
+        [
+            "int",
+            true
+        ],
+        [
+            "float",
+            true
+        ],
+        [
+            "true",
+            true
+        ],
+        [
+            "false",
+            true
+        ],
+        [
+            "null",
+            false
+        ],
+        [
+            "array",
+            false
+        ],
+        [
+            "stdClass",
+            false
+        ],
+        [
+            "Stringable",
+            true
+        ],
+        [
+            "LazyString",
+            true
+        ],
+        [
+            "enum",
+            false
+        ],
+        [
+            "Closure",
+            false
+        ],
+        [
+            "resource",
+            false
+        ]
+    ],
+    "json": [
+        [
+            "abc",
+            "\"abc\"",
+            "[\"abc\"]"
+        ],
+        [
+            "unicode",
+            "\"\\u00e9\\/\\\"\"",
+            "[\"\\u00e9\\/\\\"\"]"
+        ],
+        [
+            "empty",
+            "\"\"",
+            "[\"\"]"
+        ]
+    ],
+    "serialize": [
+        [
+            "abc",
+            "O:35:\"Symfony\\Component\\String\\LazyString\":1:{s:5:\"value\";s:3:\"abc\";}",
+            "abc",
+            true
+        ],
+        [
+            "unicode",
+            "O:35:\"Symfony\\Component\\String\\LazyString\":1:{s:5:\"value\";s:4:\"é/\"\";}",
+            "é/\"",
+            true
+        ],
+        [
+            "empty",
+            "O:35:\"Symfony\\Component\\String\\LazyString\":1:{s:5:\"value\";s:0:\"\";}",
+            "",
+            true
+        ]
+    ]
+}
