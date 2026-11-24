@@ -268,14 +268,7 @@ pub struct DumpCompletionCommand;
 
 const SUPPORTED_SHELLS: [&str; 3] = ["bash", "fish", "zsh"];
 
-/// `basename($path)` of a path with `/` separators.
-fn basename(path: &str) -> &str {
-    let trimmed = path.trim_end_matches('/');
-    match trimmed.rfind('/') {
-        Some(i) => &trimmed[i + 1..],
-        None => trimmed,
-    }
-}
+use php_value::path::basename_str as basename;
 
 impl CommandHandler for DumpCompletionCommand {
     fn class(&self) -> &str {
