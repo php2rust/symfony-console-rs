@@ -262,15 +262,8 @@ pub fn mb_str_split(s: &str, length: usize) -> Vec<String> {
 /// `urlencode($string)`: letters, digits and `-_.` kept, a space as `+`,
 /// every other byte as `%XX` (upper case).
 pub fn urlencode(s: &str) -> String {
-    let mut out = String::with_capacity(s.len());
-    for b in s.bytes() {
-        match b {
-            b'a'..=b'z' | b'A'..=b'Z' | b'0'..=b'9' | b'-' | b'_' | b'.' => out.push(b as char),
-            b' ' => out.push('+'),
-            _ => out.push_str(&format!("%{b:02X}")),
-        }
-    }
-    out
+    // The shared encoder produces ASCII only.
+    String::from_utf8_lossy(&php_value::url::urlencode(s.as_bytes())).into_owned()
 }
 
 /// `http_build_query($pairs, '', $separator)` of string pairs.
