@@ -1,4 +1,4 @@
-//! InputArgumentTest and InputOptionTest, with upstream's names and
+//! `InputArgumentTest` and `InputOptionTest`, with upstream's names and
 //! assertions. `expectUserDeprecationMessage` is checked with
 //! `symfony_deprecation_contracts::collect`.
 //!
@@ -64,7 +64,7 @@ fn suggested_values(suggestions: &CompletionSuggestions) -> Vec<&str> {
     suggestions
         .get_value_suggestions()
         .iter()
-        .map(|s| s.get_value())
+        .map(symfony_console::completion::suggestion::Suggestion::get_value)
         .collect()
 }
 

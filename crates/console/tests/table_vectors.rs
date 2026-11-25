@@ -1,8 +1,14 @@
-//! Replays tests/data/table_vectors.json: 1,500 generated tables rendered
+//! Replays `tests/data/table_vectors.json`: 1,500 generated tables rendered
 //! by PHP 8.4.27 with symfony/console v8.1.9
-//! (oracle/recorders/console_table.php, `scripts/record.sh console`).
+//! (`oracle/recorders/console_table.php`, `scripts/record.sh console`).
 //!
 //! Upstream: none
+
+#![allow(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    reason = "test helpers; a panic is a test failure"
+)]
 
 mod common;
 

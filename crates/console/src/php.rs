@@ -164,9 +164,9 @@ pub fn sort_strings(strings: &mut [String]) {
 /// The sign of `strnatcasecmp($a, $b)`.
 pub use php_value::string::strnatcasecmp;
 
-/// `sprintf($format, ...$args)` for the formats Table and SymfonyStyle
+/// `sprintf($format, ...$args)` for the formats Table and `SymfonyStyle`
 /// use: `%s`, `%N$s` and `%%`. Another conversion is refused (PHP would
-/// format a number, or throw a ValueError for an unknown one).
+/// format a number, or throw a `ValueError` for an unknown one).
 pub fn sprintf_s(format: &str, args: &[&str]) -> crate::exception::Result<String> {
     let mut out = String::with_capacity(format.len() + args.iter().map(|a| a.len()).sum::<usize>());
     let mut next = 0;

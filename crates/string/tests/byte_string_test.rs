@@ -1,6 +1,6 @@
-//! Port of symfony/string's ByteStringTest: AbstractAsciiTestCase's tests
-//! on ByteString with ByteStringTest's providers (tests/data/
-//! byte_string_test.json), and fromRandom()'s tests.
+//! Port of symfony/string's `ByteStringTest`: `AbstractAsciiTestCase`'s tests
+//! on `ByteString` with `ByteStringTest`'s providers (tests/data/
+//! `byte_string_test.json`), and `fromRandom()`'s tests.
 //!
 //! Upstream: symfony/string Tests/ByteStringTest.php
 #![allow(non_snake_case)]

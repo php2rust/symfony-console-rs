@@ -3,7 +3,7 @@
 //!
 //! A helper is shared (`Arc`), as a PHP object is. `set()` calls the
 //! helper's `setHelperSet()`; the M1-B helpers keep nothing from it, and
-//! `getHelperSet()` is not ported (DescriptorHelper and QuestionHelper,
+//! `getHelperSet()` is not ported (`DescriptorHelper` and `QuestionHelper`,
 //! which read their set, are M7 work).
 //!
 //! Symfony source copyright (c) Fabien Potencier; distributed under MIT.

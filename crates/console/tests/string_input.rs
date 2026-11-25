@@ -1,4 +1,4 @@
-//! StringInputTest and NullOutputTest, with upstream's names, assertions
+//! `StringInputTest` and `NullOutputTest`, with upstream's names, assertions
 //! and provider rows.
 //!
 //! Upstream: symfony/console Tests/Input/StringInputTest.php Tests/Output/NullOutputTest.php

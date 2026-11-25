@@ -1,4 +1,4 @@
-//! InputDefinitionTest, with upstream's names and assertions. PHP's arrays
+//! `InputDefinitionTest`, with upstream's names and assertions. PHP's arrays
 //! keyed by name compare as the ordered lists of their items.
 //!
 //! Upstream: symfony/console Tests/Input/InputDefinitionTest.php
@@ -79,7 +79,7 @@ fn invalid(e: &ConsoleError) -> bool {
 #[test]
 fn testConstructorArguments() -> R {
     let a = initialize_arguments()?;
-    assert!(InputDefinition::default().get_arguments().is_empty());
+    assert_eq!(InputDefinition::default().get_arguments(), []);
     let definition = InputDefinition::new(vec![a.foo.clone().into(), a.bar.clone().into()])?;
     assert_eq!(&[a.foo, a.bar], definition.get_arguments());
     Ok(())
@@ -88,7 +88,7 @@ fn testConstructorArguments() -> R {
 #[test]
 fn testConstructorOptions() -> R {
     let o = initialize_options()?;
-    assert!(InputDefinition::default().get_options().is_empty());
+    assert_eq!(InputDefinition::default().get_options(), []);
     let definition = InputDefinition::new(vec![o.foo.clone().into(), o.bar.clone().into()])?;
     assert_eq!(&[o.foo, o.bar], definition.get_options());
     Ok(())

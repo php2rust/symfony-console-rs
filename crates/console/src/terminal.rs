@@ -78,9 +78,7 @@ fn dimensions() -> (Option<i64>, Option<i64>) {
     if let Some(dimensions) = DIMENSIONS.get() {
         return dimensions;
     }
-    let dimensions = stty_columns()
-        .map(|s| parse_stty(&s))
-        .unwrap_or((None, None));
+    let dimensions = stty_columns().map_or((None, None), |s| parse_stty(&s));
     DIMENSIONS.set(Some(dimensions));
     dimensions
 }

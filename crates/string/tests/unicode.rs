@@ -106,7 +106,7 @@ fn per_code_point_classes_differ_only_after_unicode_15() {
         ranges(&data["prepend"]["icu"]),
     );
     let (mut e, mut p) = (Vec::new(), Vec::new());
-    for cp in 0..=0x10FFFFu32 {
+    for cp in 0..=0x0010_FFFF_u32 {
         let Some(c) = char::from_u32(cp) else {
             continue;
         };

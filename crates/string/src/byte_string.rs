@@ -408,9 +408,7 @@ impl AbstractString for ByteString {
                 .map(|&b| if b >= 0x80 { '?' } else { b as char })
                 .collect(),
         };
-        CodePointString::from_bytes(text.as_bytes())
-            .map(|s| s.width(ignore_ansi_decoration))
-            .unwrap_or(0)
+        CodePointString::from_bytes(text.as_bytes()).map_or(0, |s| s.width(ignore_ansi_decoration))
     }
 }
 

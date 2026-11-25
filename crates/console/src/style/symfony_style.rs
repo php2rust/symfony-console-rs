@@ -1,14 +1,14 @@
 //! Port of Symfony\Component\Console\Style\SymfonyStyle.php, with
 //! OutputStyle.php (the output it decorates) and StyleInterface.php.
 //!
-//! A SymfonyStyle borrows its command's input and output. Like upstream
-//! it keeps the last two bytes it wrote in a TrimmedBufferOutput, to know
+//! A `SymfonyStyle` borrows its command's input and output. Like upstream
+//! it keeps the last two bytes it wrote in a `TrimmedBufferOutput`, to know
 //! how many blank lines to put before a block or text. Tables are written
 //! to the decorated output directly, as upstream's are.
 //!
 //! Not ported (M7): the questions (`ask()`, `askHidden()`, `confirm()`,
 //! `choice()`, `askFile()`, `askQuestion()`), progress bars, trees, and
-//! sections of a ConsoleOutput. `getErrorStyle()` returns a style on the
+//! sections of a `ConsoleOutput`. `getErrorStyle()` returns a style on the
 //! same output, since no output here has a separate error output.
 //!
 //! Symfony source copyright (c) Fabien Potencier; distributed under MIT.
@@ -32,6 +32,7 @@ use crate::{
     php::sprintf_s,
     terminal::Terminal,
 };
+use std::fmt::Write as _;
 
 pub const MAX_LINE_LENGTH: i64 = 120;
 
@@ -465,7 +466,7 @@ impl<'a> SymfonyStyle<'a> {
             // ECH paints the trailing cells with the current background and CUF moves the cursor past
             // them without writing characters, so most terminals trim them when copying the selection.
             if truthy(style) && decorated && padding_length > 0 {
-                line.push_str(&format!("\x1b[{padding_length}X\x1b[{padding_length}C"));
+                let _ = write!(line, "\x1b[{padding_length}X\x1b[{padding_length}C");
             } else {
                 line.push_str(&" ".repeat(padding_length as usize));
             }

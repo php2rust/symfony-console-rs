@@ -1,5 +1,5 @@
-//! CommandTest, with upstream's names and assertions. The fixtures
-//! (TestCommand, InvokableTestCommand, MethodBasedTestCommand and the
+//! `CommandTest`, with upstream's names and assertions. The fixtures
+//! (`TestCommand`, `InvokableTestCommand`, `MethodBasedTestCommand` and the
 //! classes at the end of CommandTest.php) are handlers and `Code` values
 //! written from them: their attributes become `AsCommand` values.
 //!
@@ -33,7 +33,7 @@ type R = Result<(), ConsoleError>;
 struct TestCommand;
 
 impl CommandHandler for TestCommand {
-    fn class(&self) -> &str {
+    fn class(&self) -> &'static str {
         "TestCommand"
     }
 
@@ -164,7 +164,7 @@ fn testSetGetDefinition() -> R {
     let definition = InputDefinition::default();
     let ret: *const Command = command.set_definition(definition.clone());
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->setDefinition() implements a fluent interface"
     );
     assert_eq!(
@@ -194,7 +194,7 @@ fn testAddArgument() -> R {
     let ret: *const Command =
         command.add_argument("foo", None, "", Value::Null, SuggestedValues::None)?;
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->addArgument() implements a fluent interface"
     );
     assert!(
@@ -233,7 +233,7 @@ fn testAddOption() -> R {
         SuggestedValues::None,
     )?;
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->addOption() implements a fluent interface"
     );
     assert!(
@@ -287,7 +287,7 @@ fn testGetNamespaceGetNameSetName() -> R {
 
     let ret: *const Command = command.set_name("foobar:bar")?;
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->setName() implements a fluent interface"
     );
     assert_eq!(
@@ -325,7 +325,7 @@ fn testGetSetDescription() -> R {
     );
     let ret: *const Command = command.set_description("description1");
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->setDescription() implements a fluent interface"
     );
     assert_eq!(
@@ -342,7 +342,7 @@ fn testGetSetHelp() -> R {
     assert_eq!("help", command.get_help(), "->getHelp() returns the help");
     let ret: *const Command = command.set_help("help1");
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->setHelp() implements a fluent interface"
     );
     assert_eq!("help1", command.get_help(), "->setHelp() sets the help");
@@ -403,7 +403,7 @@ fn testGetSetAliases() -> R {
     let mut command = test_command()?;
     let ret: *const Command = command.set_aliases(["name1"])?;
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->setAliases() implements a fluent interface"
     );
     assert_eq!(
@@ -701,7 +701,7 @@ fn testSetCode() -> R {
         Ok(0)
     }));
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->setCode() implements a fluent interface"
     );
     let mut tester = CommandTester::new(command);
@@ -722,7 +722,7 @@ fn testSetCodeWithNonClosureCallable() -> R {
         Ok(0)
     }));
     assert!(
-        std::ptr::eq(ret, &command),
+        std::ptr::eq(ret, &raw const command),
         "->setCode() implements a fluent interface"
     );
     let mut tester = CommandTester::new(command);
@@ -800,7 +800,7 @@ fn testMethodCommandNameMustNotRepeatTheClassLevelName() {
 struct Php8Command;
 
 impl CommandHandler for Php8Command {
-    fn class(&self) -> &str {
+    fn class(&self) -> &'static str {
         "Symfony\\Component\\Console\\Tests\\Command\\Php8Command"
     }
 

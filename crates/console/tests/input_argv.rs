@@ -1,4 +1,4 @@
-//! ArgvInputTest, with upstream's names, assertions and provider rows
+//! `ArgvInputTest`, with upstream's names, assertions and provider rows
 //! (transcribed: they build objects).
 //!
 //! Upstream: symfony/console Tests/Input/ArgvInputTest.php

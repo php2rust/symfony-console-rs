@@ -356,7 +356,7 @@ impl AbstractString for CodePointString {
     }
 }
 
-/// AbstractString::trimPrefix(), which the Unicode classes call as
+/// `AbstractString::trimPrefix()`, which the Unicode classes call as
 /// `parent::trimPrefix()`.
 pub(crate) fn base_trim_prefix<S: AbstractString>(s: &S, prefix: Needle) -> Result<S> {
     Ok(match prefix {
@@ -383,7 +383,7 @@ pub(crate) fn base_trim_prefix<S: AbstractString>(s: &S, prefix: Needle) -> Resu
     })
 }
 
-/// AbstractString::trimSuffix() as `parent::trimSuffix()`.
+/// `AbstractString::trimSuffix()` as `parent::trimSuffix()`.
 pub(crate) fn base_trim_suffix<S: AbstractString>(s: &S, suffix: Needle) -> Result<S> {
     Ok(match suffix {
         Needle::Many(xs) => {

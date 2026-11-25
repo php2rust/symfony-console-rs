@@ -28,8 +28,8 @@ use crate::exception::{Error, Result};
 use crate::intl::{self, Form};
 use crate::{mb, php};
 
-const I32_MIN: i64 = -2147483648;
-const I32_MAX: i64 = 2147483647;
+const I32_MIN: i64 = -2_147_483_648;
+const I32_MAX: i64 = 2_147_483_647;
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, Hash)]
 pub struct UnicodeString {
@@ -135,7 +135,7 @@ impl UnicodeString {
     }
 
     /// `search($haystack, $needle, &$length)`: the byte offset and length of
-    /// the first occurrence, as grapheme_strpos() finds it, corrected where
+    /// the first occurrence, as `grapheme_strpos()` finds it, corrected where
     /// its match differs from the needle.
     fn search(&self, haystack: &str, needle: &str) -> Option<(usize, usize)> {
         let ci = self.ci();
@@ -472,7 +472,7 @@ impl AbstractString for UnicodeString {
                 Ok(s) => nfc(s).into_bytes(),
                 Err(_) => p,
             }),
-            many => many,
+            many @ Needle::Many(_) => many,
         };
         if !self.ci() {
             return base_trim_prefix(self, prefix);
@@ -486,7 +486,7 @@ impl AbstractString for UnicodeString {
                 Ok(s) => nfc(s).into_bytes(),
                 Err(_) => x,
             }),
-            many => many,
+            many @ Needle::Many(_) => many,
         };
         if !self.ci() {
             return base_trim_suffix(self, suffix);
@@ -512,10 +512,10 @@ impl std::fmt::Display for UnicodeString {
 /// Extended grapheme clusters as PCRE2 10.44's `\X` finds them, which
 /// `chunk()` (and through it `wordwrap()`) uses: ICU's clusters, split where
 /// the oracle shows PCRE2 breaks and ICU does not (`tests/unicode.rs`):
-/// before a character joined only by the Indic conjunct rule (GB9c, which
+/// before a character joined only by the Indic conjunct rule (`GB9c`, which
 /// PCRE2 10.44 lacks), after a regional indicator before anything but
 /// another regional indicator, and between a Prepend character and an
-/// Extended_Pictographic one.
+/// `Extended_Pictographic` one.
 pub fn pcre_graphemes(string: &str) -> Vec<&str> {
     let mut out = Vec::new();
     for cluster in string.graphemes(true) {

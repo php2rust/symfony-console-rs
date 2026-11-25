@@ -1,4 +1,4 @@
-//! HelperSetTest and FormatterHelperTest, with upstream's names and
+//! `HelperSetTest` and `FormatterHelperTest`, with upstream's names and
 //! assertions. The mock helpers are a test helper that records its
 //! `setHelperSet()` calls.
 //!

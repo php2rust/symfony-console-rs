@@ -1,4 +1,4 @@
-//! InputTest and ArrayInputTest, with upstream's names, assertions and
+//! `InputTest` and `ArrayInputTest`, with upstream's names, assertions and
 //! provider rows (transcribed: they build objects).
 //!
 //! Upstream: symfony/console Tests/Input/InputTest.php Tests/Input/ArrayInputTest.php

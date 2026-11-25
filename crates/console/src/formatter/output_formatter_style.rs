@@ -59,13 +59,13 @@ impl OutputFormatterStyle {
     /// `setForeground($color)`: the name is kept even when the color is
     /// invalid and the exception leaves the previous color in place.
     pub fn set_foreground(&mut self, color: Option<&str>) -> Result<()> {
-        self.foreground = color.unwrap_or_default().to_owned();
+        color.unwrap_or_default().clone_into(&mut self.foreground);
         self.color = Color::new(&self.foreground, &self.background, &self.options)?;
         Ok(())
     }
 
     pub fn set_background(&mut self, color: Option<&str>) -> Result<()> {
-        self.background = color.unwrap_or_default().to_owned();
+        color.unwrap_or_default().clone_into(&mut self.background);
         self.color = Color::new(&self.foreground, &self.background, &self.options)?;
         Ok(())
     }
@@ -98,18 +98,17 @@ impl OutputFormatterStyle {
     }
 
     pub fn apply(&self, text: &str) -> String {
-        let graceful = match self.handles_href_gracefully.get() {
-            Some(graceful) => graceful,
-            None => {
-                let konsole = getenv("KONSOLE_VERSION");
-                let graceful = getenv("TERMINAL_EMULATOR").as_deref() != Some("JetBrains-JediTerm")
-                    && konsole
-                        .as_deref()
-                        .is_none_or(|v| v.is_empty() || v == "0" || php_int(v) > 201100)
-                    && server("IDEA_INITIAL_DIRECTORY").is_none();
-                self.handles_href_gracefully.set(Some(graceful));
-                graceful
-            }
+        let graceful = if let Some(graceful) = self.handles_href_gracefully.get() {
+            graceful
+        } else {
+            let konsole = getenv("KONSOLE_VERSION");
+            let graceful = getenv("TERMINAL_EMULATOR").as_deref() != Some("JetBrains-JediTerm")
+                && konsole
+                    .as_deref()
+                    .is_none_or(|v| v.is_empty() || v == "0" || php_int(v) > 201_100)
+                && server("IDEA_INITIAL_DIRECTORY").is_none();
+            self.handles_href_gracefully.set(Some(graceful));
+            graceful
         };
         match &self.href {
             Some(href) if graceful => self

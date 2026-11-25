@@ -1,7 +1,7 @@
-//! Port of symfony/string: ByteString, CodePointString and UnicodeString
-//! with the AbstractString and AbstractUnicodeString behaviour they share,
+//! Port of symfony/string: `ByteString`, `CodePointString` and `UnicodeString`
+//! with the `AbstractString` and `AbstractUnicodeString` behaviour they share,
 //! the PHP functions they call, the `u()`, `b()` and `s()` helpers,
-//! LazyString, and the English, French and Spanish inflectors.
+//! `LazyString`, and the English, French and Spanish inflectors.
 //!
 //! Upstream: symfony/string Resources/functions.php
 
@@ -42,7 +42,7 @@ pub fn b(string: impl AsRef<[u8]>) -> ByteString {
     ByteString::new(string)
 }
 
-/// `s($string)`: a UnicodeString for valid UTF-8, a ByteString otherwise.
+/// `s($string)`: a `UnicodeString` for valid UTF-8, a `ByteString` otherwise.
 pub fn s(string: impl AsRef<[u8]>) -> Str {
     match std::str::from_utf8(string.as_ref()) {
         Ok(text) => Str::Unicode(UnicodeString::new(text)),

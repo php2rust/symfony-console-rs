@@ -1,4 +1,4 @@
-//! Port of symfony/string's SpanishInflectorTest, on upstream's provider
+//! Port of symfony/string's `SpanishInflectorTest`, on upstream's provider
 //! rows as the oracle returns them (`tests/data/spanish_inflector_test.json`,
 //! `scripts/record.sh string`).
 //!

@@ -18,7 +18,7 @@ pub enum ConsoleError {
     Logic(String),
     /// `CommandNotFoundException`, with the alternatives it suggests.
     CommandNotFound(String, Vec<String>),
-    /// `NamespaceNotFoundException` (extends CommandNotFoundException).
+    /// `NamespaceNotFoundException` (extends `CommandNotFoundException`).
     NamespaceNotFound(String, Vec<String>),
     /// An error from the command's own code, already formatted by its
     /// class name.

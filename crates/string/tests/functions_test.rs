@@ -1,4 +1,4 @@
-//! Port of symfony/string's FunctionsTest: `u()`, `b()` and `s()`, on
+//! Port of symfony/string's `FunctionsTest`: `u()`, `b()` and `s()`, on
 //! upstream's provider rows (PHP's `null` input is Rust's `""`).
 //!
 //! Upstream: symfony/string Tests/FunctionsTest.php

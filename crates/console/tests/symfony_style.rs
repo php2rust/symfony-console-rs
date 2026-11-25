@@ -1,11 +1,17 @@
-//! SymfonyStyleTest, with upstream's names and assertions. The command
+//! `SymfonyStyleTest`, with upstream's names and assertions. The command
 //! fixtures (Tests/Fixtures/Style/SymfonyStyle/command/command_*.php) are
 //! closures written from them; their expected outputs are upstream's files,
-//! copied to tests/Fixtures. command_7 asks questions (QuestionHelper, M7),
+//! copied to tests/Fixtures. `command_7` asks questions (`QuestionHelper`, M7),
 //! so `testOutputs` stays pending and `outputs_without_questions` runs the
 //! other 27 fixtures.
 //!
 //! Upstream: symfony/console Tests/Style/SymfonyStyleTest.php
+
+#![allow(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    reason = "test helpers; a panic is a test failure"
+)]
 #![allow(non_snake_case)]
 
 use php_value::PhpArray;
@@ -103,7 +109,7 @@ fn command_3(input: &mut Input, output: &mut dyn OutputInterface) -> Result<i64,
     Ok(0)
 }
 
-/// command_4.php, and command_4_with_iterators.php (an ArrayIterator of
+/// `command_4.php`, and `command_4_with_iterators.php` (an `ArrayIterator` of
 /// messages is the same list here).
 fn command_4(input: &mut Input, output: &mut dyn OutputInterface) -> Result<i64, ConsoleError> {
     let mut output = SymfonyStyle::new(input, output)?;
@@ -357,7 +363,7 @@ fn command_26(input: &mut Input, output: &mut dyn OutputInterface) -> Result<i64
     Ok(0)
 }
 
-/// `inputCommandToOutputFilesProvider()` without command_7.
+/// `inputCommandToOutputFilesProvider()` without `command_7`.
 fn fixtures() -> Vec<(&'static str, Fixture, &'static str)> {
     macro_rules! out {
         ($n:literal) => {
@@ -403,7 +409,7 @@ fn fixtures() -> Vec<(&'static str, Fixture, &'static str)> {
     ]
 }
 
-/// `testOutputs` on every fixture but command_7 (questions, M7).
+/// `testOutputs` on every fixture but `command_7` (questions, M7).
 #[test]
 fn outputs_without_questions() -> R {
     let _columns = Columns::set();

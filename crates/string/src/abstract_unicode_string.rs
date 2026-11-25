@@ -1,5 +1,5 @@
 //! Port of Symfony\Component\String\AbstractUnicodeString.php: what
-//! CodePointString and UnicodeString share, as functions both call.
+//! `CodePointString` and `UnicodeString` share, as functions both call.
 //!
 //! The case functions use mbstring's mappings ([`crate::mb`]), the fixed
 //! patterns of `camel()`, `snake()` and `title()` run on php-pcre, and
@@ -156,7 +156,7 @@ pub(crate) fn text<S: AbstractString>(s: &S) -> &str {
 pub(crate) fn from_code_points<S: AbstractString>(codes: &[i64]) -> Result<S> {
     let mut string = Vec::new();
     for &code in codes {
-        let code = code % 0x200000;
+        let code = code % 0x0020_0000;
         if code < 0x80 {
             string.push(code as u8);
         } else if code < 0x800 {
@@ -205,7 +205,7 @@ pub(crate) fn camel<S: AbstractString>(s: &S) -> Result<S> {
     Ok(s.with_string(out.into_iter().filter(|&b| b != b' ').collect()))
 }
 
-/// `codePointsAt($offset)` (AbstractUnicodeString's).
+/// `codePointsAt($offset)` (`AbstractUnicodeString`'s).
 pub(crate) fn code_points_at<S: AbstractString>(s: &S, offset: i64) -> Vec<u32> {
     let str = s.slice(offset, Some(1));
     text(&str).chars().map(|c| c as u32).collect()
@@ -226,7 +226,7 @@ pub(crate) fn folded<S: AbstractString>(s: &S, compat: bool) -> S {
     s.with_string(mb::strtolower(&string).into_bytes())
 }
 
-/// `join($strings, $lastGlue)` (AbstractUnicodeString's).
+/// `join($strings, $lastGlue)` (`AbstractUnicodeString`'s).
 pub(crate) fn join<S: AbstractString>(
     s: &S,
     strings: &[&[u8]],
@@ -247,11 +247,11 @@ pub(crate) fn upper<S: AbstractString>(s: &S) -> S {
     s.with_string(mb::strtoupper(text(s)).into_bytes())
 }
 
-/// AbstractUnicodeString::normalize(): CodePointString's.
+/// `AbstractUnicodeString::normalize()`: `CodePointString`'s.
 pub(crate) fn normalize<S: AbstractString>(s: &S, form: i64) -> Result<S> {
-    let form = match Form::from_php(form) {
-        Some(f @ (Form::Nfc | Form::Nfd | Form::Nfkc | Form::Nfkd)) => f,
-        _ => return Err(Error::invalid("Unsupported normalization form.")),
+    let Some(form @ (Form::Nfc | Form::Nfd | Form::Nfkc | Form::Nfkd)) = Form::from_php(form)
+    else {
+        return Err(Error::invalid("Unsupported normalization form."));
     };
     Ok(s.with_string(intl::normalized(text(s), form).into_bytes()))
 }
@@ -392,7 +392,7 @@ pub(crate) fn trim<S: AbstractString>(
     Ok(s.with_string(t.as_bytes().to_vec()))
 }
 
-/// AbstractUnicodeString::trimPrefix() / trimSuffix() under `ignoreCase()`:
+/// `AbstractUnicodeString::trimPrefix()` / `trimSuffix()` under `ignoreCase()`:
 /// `preg_replace("{^(?:$prefix)}iuD", '')` with each prefix quoted.
 pub(crate) fn trim_affix_ignore_case<S: AbstractString>(
     s: &S,
@@ -456,15 +456,12 @@ fn remove_bel_osc(s: &str) -> String {
         let end = body
             .find(['\x07', '\x1B', '\n', '\r'])
             .filter(|&e| body[e..].starts_with('\x07'));
-        match end {
-            Some(e) => {
-                out.push_str(&rest[..at]);
-                rest = &body[e + 1..];
-            }
-            None => {
-                out.push_str(&rest[..at + 2]);
-                rest = body;
-            }
+        if let Some(e) = end {
+            out.push_str(&rest[..at]);
+            rest = &body[e + 1..];
+        } else {
+            out.push_str(&rest[..at + 2]);
+            rest = body;
         }
     }
     out.push_str(rest);

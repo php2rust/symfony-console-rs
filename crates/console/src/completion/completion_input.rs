@@ -1,5 +1,5 @@
 //! Port of Symfony\Component\Console\Completion\CompletionInput.php: an
-//! ArgvInput whose parse errors are ignored, and what is being completed.
+//! `ArgvInput` whose parse errors are ignored, and what is being completed.
 //!
 //! Symfony source copyright (c) Fabien Potencier; distributed under MIT.
 //!
@@ -142,7 +142,7 @@ impl CompletionInput {
             let is_array = argument_name
                 .as_deref()
                 .and_then(|n| self.input.definition().get_argument(n).ok())
-                .is_some_and(|a| a.is_array());
+                .is_some_and(super::super::input::input_argument::InputArgument::is_array);
             if !set || is_array {
                 self.completion_name = argument_name;
             } else {

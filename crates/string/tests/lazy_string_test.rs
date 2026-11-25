@@ -1,4 +1,4 @@
-//! Port of symfony/string's LazyStringTest. PHP's closures are Rust
+//! Port of symfony/string's `LazyStringTest`. PHP's closures are Rust
 //! closures given with the name `getPrettyName()` would find; the
 //! anonymous class of `testLazyCallable` is an [`Invokable`]; `\Exception`
 //! (a Stringable) is a test type with PHP's `__toString()` layout.
@@ -18,7 +18,7 @@ use symfony_string::{
 };
 
 /// `new \Exception($message)` as a Stringable: `(string) $e` is
-/// "Exception: message in file:line" and the trace.
+/// "Exception: message in <file:line>" and the trace.
 struct Exception(&'static str);
 
 impl Stringable for Exception {

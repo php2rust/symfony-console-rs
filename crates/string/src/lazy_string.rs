@@ -10,7 +10,7 @@
 //! file has no `strict_types`, so the callback's value is coerced as a
 //! `string` return type coerces it: null is `""`, scalars are cast
 //! (floats with `precision = 14`), a Stringable is converted, and anything
-//! else is the TypeError upstream rewrites. A callback that throws is
+//! else is the `TypeError` upstream rewrites. A callback that throws is
 //! called again by the next cast, as upstream's closure is; a value that
 //! fails the coercion fails again without a second call.
 //!
@@ -27,7 +27,7 @@ use php_value::{Key, PhpArray, PhpString, Value, numeric::float_to_string};
 /// `LazyString::class`.
 pub const CLASS: &str = "Symfony\\Component\\String\\LazyString";
 
-/// What a cast of a LazyString throws.
+/// What a cast of a `LazyString` throws.
 #[derive(Clone)]
 pub enum Thrown {
     /// PHP's `\TypeError`: the rewritten return type error, a bad
@@ -38,7 +38,7 @@ pub enum Thrown {
     Error(String),
     /// What the callback (or a Stringable) threw, passed on unchanged.
     Callback(Arc<dyn std::error::Error + Send + Sync>),
-    /// A cast of a LazyString from inside its own callback. PHP recurses
+    /// A cast of a `LazyString` from inside its own callback. PHP recurses
     /// until it runs out of stack; this port refuses.
     Recursion,
 }
@@ -257,7 +257,7 @@ impl Drop for Casting {
 }
 
 /// `$value ?? ''` through a `string` return type: the string, or the type
-/// PHP's TypeError names.
+/// PHP's `TypeError` names.
 fn coerce(value: Option<&Returned>) -> Result<Result<PhpString, String>, Thrown> {
     Ok(match value {
         None | Some(Returned::Value(Value::Null)) => Ok(PhpString::default()),
@@ -317,7 +317,7 @@ impl LazyString {
 
     /// The check `fromCallable()` makes of an array that is not callable
     /// (`$is_callable` false): it must start with a Closure or have more
-    /// than two items, else this TypeError. Rust callers build a
+    /// than two items, else this `TypeError`. Rust callers build a
     /// [`Callable`] or a lazy-callable instead; this keeps the check for
     /// arrays that arrive as values.
     pub fn check_callable_array(items: &PhpArray, is_callable: bool) -> Result<(), Thrown> {
@@ -336,7 +336,7 @@ impl LazyString {
     }
 
     /// `LazyString::fromStringable($value)` for a scalar: cast now. Null,
-    /// arrays and objects are PHP's TypeError (without its ", called in"
+    /// arrays and objects are PHP's `TypeError` (without its ", called in"
     /// suffix).
     pub fn from_stringable_value(value: &Value) -> Result<Self, Thrown> {
         match value {
@@ -391,7 +391,7 @@ impl LazyString {
 
     /// `(string) $lazyString`.
     pub fn to_php_string(&self) -> Result<PhpString, Thrown> {
-        let id = Arc::as_ptr(&self.0) as *const () as usize;
+        let id = Arc::as_ptr(&self.0).cast::<()>() as usize;
         let Some(_casting) = Casting::enter(id) else {
             return Err(Thrown::Recursion);
         };

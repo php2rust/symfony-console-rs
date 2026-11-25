@@ -97,7 +97,7 @@ impl InputArgument {
         }
         let default = if self.is_array() {
             match default {
-                Value::Null => Value::Array(Default::default()),
+                Value::Null => Value::Array(php_value::PhpArray::default()),
                 Value::Array(a) => Value::Array(a),
                 _ => {
                     return Err(ConsoleError::Logic(

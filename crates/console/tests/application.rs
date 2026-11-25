@@ -1,9 +1,15 @@
-//! ApplicationTest's tests of the command registry, with upstream's names
+//! `ApplicationTest`'s tests of the command registry, with upstream's names
 //! and assertions. The fixture commands (Tests/Fixtures/Foo*Command.php
 //! and the others the tests load) are handlers with their names, aliases,
 //! descriptions and hidden flags; `instanceof` is the handler's class.
 //!
 //! Upstream: symfony/console Tests/ApplicationTest.php
+
+#![allow(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    reason = "test helpers; a panic is a test failure"
+)]
 #![allow(non_snake_case)]
 
 use std::sync::Arc;

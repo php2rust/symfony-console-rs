@@ -42,7 +42,7 @@ fn cell_style(value: &Value) -> Option<TableCellStyle> {
     TableCellStyle::new(&borrowed).ok()
 }
 
-/// A recorded cell: a TableCell or TableSeparator object, or a value.
+/// A recorded cell: a `TableCell` or `TableSeparator` object, or a value.
 pub fn cell(value: &Value) -> Cell {
     let Some(object) = value.as_object() else {
         return Cell::Value(value.clone());
@@ -75,7 +75,7 @@ fn is_separator(value: &Value) -> bool {
         .is_some_and(|o| o.class().ends_with("TableSeparator"))
 }
 
-/// A recorded row: an array of cells (its keys kept) or a TableSeparator.
+/// A recorded row: an array of cells (its keys kept) or a `TableSeparator`.
 pub fn table_row(value: &Value) -> Row {
     match value.as_array() {
         Some(cells) => Row::Cells(Arr::keyed(
