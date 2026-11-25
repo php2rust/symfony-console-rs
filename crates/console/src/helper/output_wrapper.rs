@@ -39,7 +39,7 @@ impl OutputWrapper {
         Self { allow_cut_urls }
     }
 
-    fn pattern(&self, width: i64) -> Result<Regex> {
+    fn pattern(self, width: i64) -> Result<Regex> {
         let key = (self.allow_cut_urls, width);
         if let Some(regex) = PATTERNS.with(|p| p.borrow().get(&key).cloned()) {
             return Ok(regex);

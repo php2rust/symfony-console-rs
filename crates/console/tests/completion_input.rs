@@ -49,6 +49,7 @@ type BindCase = (
     &'static str,
 );
 
+#[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
 fn provideBindData() -> Vec<BindCase> {
     let r = Some("with-required-value");
     let o = Some("with-optional-value");

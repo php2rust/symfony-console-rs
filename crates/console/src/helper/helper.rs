@@ -52,6 +52,7 @@ impl Helper {
 
     /// `removeDecoration($formatter, $string)`: style tags, SGR sequences
     /// and terminal hyperlinks removed.
+    #[expect(clippy::similar_names, reason = "names as in the PHP source")]
     pub fn remove_decoration(formatter: &mut OutputFormatter, string: &str) -> Result<String> {
         if !string.contains('<') && !string.contains('\x1b') {
             return Ok(string.to_owned());

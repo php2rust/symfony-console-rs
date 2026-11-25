@@ -74,14 +74,26 @@ fn hexdec(text: &str) -> i64 {
 
 /// PHP's `round()` for these quotients: none of them is ever half-way
 /// between two integers, so rounding to nearest is exact.
+#[expect(
+    clippy::cast_possible_truncation,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 fn round(x: f64) -> i64 {
     x.round() as i64
 }
 
+#[expect(
+    clippy::cast_precision_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 fn degrade_to_ansi4(r: i64, g: i64, b: i64) -> i64 {
     (round(b as f64 / 255.0) << 2) | (round(g as f64 / 255.0) << 1) | round(r as f64 / 255.0)
 }
 
+#[expect(
+    clippy::cast_precision_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 fn degrade_to_ansi8(r: i64, g: i64, b: i64) -> i64 {
     if r == g && g == b {
         if r < 8 {

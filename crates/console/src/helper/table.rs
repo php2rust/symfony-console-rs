@@ -44,6 +44,10 @@ impl<T> Default for Arr<T> {
 
 impl<T: Clone> Arr<T> {
     /// A list: keys 0, 1, 2...
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     pub fn list(values: Vec<T>) -> Self {
         Self(
             values
@@ -95,6 +99,12 @@ impl<T: Clone> Arr<T> {
 
     /// `array_splice($a, $offset, 0, [$value])`: inserted at a position,
     /// then the keys renumbered.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn splice_insert(&mut self, offset: i64, value: T) {
         let at = (offset.max(0) as usize).min(self.0.len());
         self.0.insert(at, (0, value));
@@ -387,11 +397,22 @@ impl<'a> Table<'a> {
         self.output.get_formatter()
     }
 
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn width_of(&mut self, text: &str) -> Result<i64> {
         Ok(Helper::width(&Helper::remove_decoration(self.formatter(), text)?) as i64)
     }
 
     /// `render()`.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
+    #[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
     pub fn render(&mut self) -> Result<()> {
         let horizontal = self.orientation == Orientation::Horizontal;
         let vertical = self.orientation == Orientation::Vertical;
@@ -599,6 +620,12 @@ impl<'a> Table<'a> {
     }
 
     /// `renderRowSeparator($type, $title, $titleFormat, $rowAbove, $rowBelow)`.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn render_row_separator(
         &mut self,
         kind: Separator,
@@ -735,6 +762,12 @@ impl<'a> Table<'a> {
     }
 
     /// `renderCell($row, $column, $cellFormat)`.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn render_cell(&mut self, row: &Cells, column: i64, cell_format: &str) -> Result<String> {
         let cell = row
             .get(column)
@@ -814,6 +847,13 @@ impl<'a> Table<'a> {
 
     /// `buildTableRows($rows)`: each row with the extra lines its
     /// multi-line cells add.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
+    #[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
     fn build_table_rows(&mut self, rows: Arr<Row>) -> Result<Vec<Vec<Row>>> {
         let mut rows = rows;
         let mut unmerged_rows: Arr<Arr<Cells>> = Arr::default();
@@ -966,6 +1006,11 @@ impl<'a> Table<'a> {
 
     /// `fillNextRows($rows, $line)`: the cells a rowspan adds to the rows
     /// below.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
+    #[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
     fn fill_next_rows(&self, rows: Arr<Row>, line: i64) -> Result<Arr<Row>> {
         let mut rows = rows;
         let mut unmerged_rows: Arr<Cells> = Arr::default();
@@ -1101,6 +1146,12 @@ impl<'a> Table<'a> {
     }
 
     /// `calculateColumnsWidth($groups)`.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn calculate_columns_width(&mut self, groups: &[Vec<Row>]) -> Result<()> {
         let n = self.number_of_columns.max(0) as usize;
         // Initialize max widths for all columns
@@ -1155,6 +1206,10 @@ impl<'a> Table<'a> {
     }
 
     /// `getColumnSeparatorWidth()`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn get_column_separator_width(&self) -> Result<i64> {
         let border = sprintf_s(
             self.style.get_border_format(),
@@ -1200,6 +1255,10 @@ fn colspan_cell(value: &str, colspan: i64) -> Result<TableCell> {
 }
 
 /// `getNumberOfColumns($row)`.
+#[expect(
+    clippy::cast_possible_wrap,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 fn number_of_columns(row: &Cells) -> i64 {
     row.len() as i64
         + row

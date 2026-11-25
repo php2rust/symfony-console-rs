@@ -49,6 +49,7 @@ impl HelperSet {
     }
 
     /// `set($helper, $alias)`.
+    #[expect(clippy::needless_pass_by_value, reason = "upstream's signature")]
     pub fn set(&mut self, helper: Arc<dyn HelperInterface>, alias: Option<&str>) {
         let name = helper.get_name().to_owned();
         self.insert(name, Arc::clone(&helper));

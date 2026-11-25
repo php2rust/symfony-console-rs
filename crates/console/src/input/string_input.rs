@@ -173,6 +173,10 @@ fn str_replace_all(subject: &[u8], searches: &[&[u8]]) -> Vec<u8> {
 /// `\0`-`\777` (up to three digits, the byte taken modulo 256), `\x` with
 /// one or two hex digits; any other escaped byte stands for itself, and a
 /// final lone backslash is kept (observed; the manual does not say).
+#[expect(
+    clippy::cast_possible_truncation,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn stripcslashes(s: &[u8]) -> Vec<u8> {
     let mut out = Vec::with_capacity(s.len());
     let mut i = 0;

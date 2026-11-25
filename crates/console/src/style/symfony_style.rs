@@ -371,6 +371,10 @@ impl<'a> SymfonyStyle<'a> {
     }
 
     /// `autoPrependBlock()`.
+    #[expect(
+        clippy::naive_bytecount,
+        reason = "short slices; no bytecount dependency"
+    )]
     fn auto_prepend_block(&mut self) -> Result<()> {
         let fetched = self.buffered_output.fetch();
         let chars = &fetched[fetched.len().saturating_sub(2)..];
@@ -394,6 +398,10 @@ impl<'a> SymfonyStyle<'a> {
         Ok(())
     }
 
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn width_without_decoration(&mut self, text: &str) -> Result<i64> {
         Ok(Helper::width(&Helper::remove_decoration(
             self.output.get_formatter(),
@@ -402,6 +410,12 @@ impl<'a> SymfonyStyle<'a> {
     }
 
     /// `createBlock($messages, $type, $style, $prefix, $padding, $escape)`.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn create_block(
         &mut self,
         messages: &[&str],
@@ -480,6 +494,12 @@ impl<'a> SymfonyStyle<'a> {
     }
 
     /// `createOutlineBlock($messages, $type, $style, $padding, $escape)`.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn create_outline_block(
         &mut self,
         messages: &[&str],

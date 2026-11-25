@@ -128,6 +128,7 @@ fn testParseArguments() -> R {
 
 type OptionsCase = (Vec<&'static str>, Vec<Item>, PhpArray, &'static str);
 
+#[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
 fn provideOptions() -> Result<Vec<OptionsCase>, ConsoleError> {
     let t = Value::Bool(true);
     Ok(vec![
@@ -1030,6 +1031,7 @@ fn strings(values: &[&str]) -> Vec<String> {
 }
 
 #[test]
+#[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
 fn testUnparse() -> R {
     // $createSingleOptionScenario
     let single =

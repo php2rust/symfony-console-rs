@@ -194,6 +194,10 @@ impl OutputFormatter {
     }
 
     /// `applyCurrentStyle($text, $current, $width, &$currentLineLength)`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn apply_current_style(
         &self,
         text: &str,

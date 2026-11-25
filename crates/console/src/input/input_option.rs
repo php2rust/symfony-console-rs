@@ -39,6 +39,7 @@ pub struct InputOption {
 
 impl InputOption {
     /// `new InputOption($name, $shortcut, $mode, $description, $default, $suggestedValues)`.
+    #[expect(clippy::needless_pass_by_value, reason = "upstream's signature")]
     pub fn new(
         name: &str,
         shortcut: Shortcut<'_>,

@@ -34,6 +34,11 @@ pub type TrimmedBufferOutput = Output<TrimmedBuffer>;
 
 impl TrimmedBufferOutput {
     /// `new TrimmedBufferOutput($maxLength, $verbosity, $decorated, $formatter)`.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     pub fn new(
         max_length: i64,
         verbosity: Option<i64>,

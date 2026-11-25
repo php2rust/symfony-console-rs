@@ -57,6 +57,10 @@ impl FormatterHelper {
     }
 
     /// `truncate($message, $length, $suffix)`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     pub fn truncate(&self, message: &str, length: i64, suffix: &str) -> String {
         let computed_length = length - Helper::width(suffix) as i64;
         if computed_length > Helper::width(message) as i64 {

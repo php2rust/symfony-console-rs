@@ -552,6 +552,7 @@ fn complete_input_definition() -> Result<InputDefinition, ConsoleError> {
 }
 
 #[test]
+#[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
 fn testUnparse() -> R {
     let single = |option: Item,
                   input: PhpArray,

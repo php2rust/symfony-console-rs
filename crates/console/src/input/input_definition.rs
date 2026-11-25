@@ -145,6 +145,10 @@ impl InputDefinition {
     }
 
     /// `getArgumentCount()`: `PHP_INT_MAX` after an array argument.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     pub fn get_argument_count(&self) -> i64 {
         if self.last_array_argument.is_some() {
             i64::MAX
@@ -198,7 +202,7 @@ impl InputDefinition {
             .map(|s| s.split('|').map(str::to_owned).collect())
             .unwrap_or_default();
         for shortcut in &shortcuts {
-            if let Some(owner) = self.lookup(&self.shortcuts, shortcut)
+            if let Some(owner) = Self::lookup(&self.shortcuts, shortcut)
                 && let Some(existing) = self.options.iter().find(|o| o.get_name() == owner)
                 && !option.equals(existing)
             {
@@ -227,7 +231,7 @@ impl InputDefinition {
         Ok(())
     }
 
-    fn lookup<'a>(&self, map: &'a [(String, String)], key: &str) -> Option<&'a str> {
+    fn lookup<'a>(map: &'a [(String, String)], key: &str) -> Option<&'a str> {
         map.iter().find(|(k, _)| k == key).map(|(_, v)| v.as_str())
     }
 
@@ -249,11 +253,11 @@ impl InputDefinition {
     }
 
     pub fn has_shortcut(&self, name: &str) -> bool {
-        self.lookup(&self.shortcuts, name).is_some()
+        Self::lookup(&self.shortcuts, name).is_some()
     }
 
     pub fn has_negation(&self, name: &str) -> bool {
-        self.lookup(&self.negations, name).is_some()
+        Self::lookup(&self.negations, name).is_some()
     }
 
     pub fn get_option_for_shortcut(&self, shortcut: &str) -> Result<&InputOption> {
@@ -268,7 +272,7 @@ impl InputDefinition {
     }
 
     pub fn shortcut_to_name(&self, shortcut: &str) -> Result<String> {
-        self.lookup(&self.shortcuts, shortcut)
+        Self::lookup(&self.shortcuts, shortcut)
             .map(str::to_owned)
             .ok_or_else(|| {
                 ConsoleError::InvalidArgument(format!("The \"-{shortcut}\" option does not exist."))
@@ -276,7 +280,7 @@ impl InputDefinition {
     }
 
     pub fn negation_to_name(&self, negation: &str) -> Result<String> {
-        self.lookup(&self.negations, negation)
+        Self::lookup(&self.negations, negation)
             .map(str::to_owned)
             .ok_or_else(|| {
                 ConsoleError::InvalidArgument(format!(

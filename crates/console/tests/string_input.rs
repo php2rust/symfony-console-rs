@@ -22,6 +22,7 @@ use symfony_console::{
 
 type R = Result<(), ConsoleError>;
 
+#[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
 fn get_tokenize_data() -> Vec<(&'static str, Vec<&'static str>, &'static str)> {
     vec![
         ("", vec![], "->tokenize() parses an empty string"),

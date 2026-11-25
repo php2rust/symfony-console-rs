@@ -135,6 +135,11 @@ pub use php_value::string::levenshtein;
 
 /// `$a <=> $b` for two strings, as `sort()` orders them by default (PHP
 /// 8): as numbers when both are numeric, else byte by byte.
+#[expect(
+    clippy::cast_precision_loss,
+    clippy::float_cmp,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn compare_strings(a: &[u8], b: &[u8]) -> Ordering {
     if is_numeric(a) && is_numeric(b) {
         let number = |s: &[u8]| {
@@ -216,6 +221,12 @@ pub fn sprintf_s(format: &str, args: &[&str]) -> crate::exception::Result<String
 /// `str_pad($string, $length, $padString, $padType)`, on bytes: the pad
 /// string is repeated and cut to fill `$length` bytes. A cut multi-byte
 /// pad string is repaired lossily (PHP would keep the partial bytes).
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn str_pad(
     input: &str,
     length: i64,

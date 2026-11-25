@@ -58,6 +58,10 @@ impl Input {
     /// `$_SERVER['argv']`. Tokens are `String`s here, so an argument that
     /// is not UTF-8 is refused (PHP would keep its bytes).
     pub fn argv_from_server(definition: Option<InputDefinition>) -> Result<Self> {
+        #[expect(
+            clippy::unnecessary_debug_formatting,
+            reason = "the message quotes the raw argument"
+        )]
         let argv = crate::env::server_argv().map_err(|arg| {
             ConsoleError::Runtime(format!(
                 "Argument values expected to be UTF-8, got {arg:?}."
@@ -712,6 +716,10 @@ impl Input {
         }
     }
 
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn parse_argument(&mut self, token: &str) -> Result<()> {
         let c = self.arguments.len() as i64;
         if self.definition.has_argument_at(c) {
@@ -915,6 +923,11 @@ pub(crate) fn truthy(value: &Value) -> bool {
 /// `$value == $string` (PHP 8): a numeric string against a number or
 /// another numeric string compares numerically; a bool compares
 /// truthiness; null equals `''`; otherwise strings compare as bytes.
+#[expect(
+    clippy::cast_precision_loss,
+    clippy::float_cmp,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub(crate) fn loose_equals_str(value: &Value, string: &str) -> bool {
     use php_value::numeric::{is_numeric, string_to_float};
     let s = string.as_bytes();

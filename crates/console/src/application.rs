@@ -458,6 +458,11 @@ impl Application {
     }
 
     /// `find($name)`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
+    #[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
     pub fn find(&mut self, name: &str) -> Result<SharedCommand> {
         self.init()?;
 
@@ -815,16 +820,20 @@ fn abbreviation_matches(name: &str, candidate: &str, caseless: bool, full: bool)
 }
 
 /// `findAlternatives($name, $collection)`.
+#[expect(
+    clippy::cast_precision_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 fn find_alternatives(name: &str, collection: &[String]) -> Vec<String> {
     const THRESHOLD: f64 = 1e3;
-    let mut alternatives: Vec<(String, f64)> = Vec::new();
-
     fn entry<'a>(alternatives: &'a mut [(String, f64)], name: &str) -> Option<&'a mut f64> {
         alternatives
             .iter_mut()
             .find(|(n, _)| n == name)
             .map(|(_, lev)| lev)
     }
+
+    let mut alternatives: Vec<(String, f64)> = Vec::new();
 
     let collection_parts: Vec<(&String, Vec<&str>)> = collection
         .iter()

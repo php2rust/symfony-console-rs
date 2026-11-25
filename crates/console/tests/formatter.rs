@@ -477,6 +477,7 @@ fn w(formatter: &mut OutputFormatter, message: &str, width: usize) -> String {
 }
 
 #[test]
+#[expect(clippy::too_many_lines, reason = "one function, as upstream's")]
 fn testFormatAndWrap() {
     let mut formatter = OutputFormatter::new(true, vec![]);
     let x = &mut formatter;
