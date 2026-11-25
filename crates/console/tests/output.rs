@@ -1,4 +1,4 @@
-//! OutputTest and StreamOutputTest, with upstream's names and assertions.
+//! `OutputTest` and `StreamOutputTest`, with upstream's names and assertions.
 //!
 //! Upstream: symfony/console Tests/Output/OutputTest.php Tests/Output/StreamOutputTest.php
 #![allow(non_snake_case)]

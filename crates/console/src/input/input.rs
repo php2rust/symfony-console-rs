@@ -67,7 +67,7 @@ impl Input {
         Self::argv(&argv, definition)
     }
 
-    /// `new ArgvInput([])` with `setTokens($tokens)` (StringInput).
+    /// `new ArgvInput([])` with `setTokens($tokens)` (`StringInput`).
     pub(crate) fn from_tokens(tokens: Vec<String>) -> Self {
         Self {
             definition: InputDefinition::default(),
@@ -148,7 +148,7 @@ impl Input {
             .get_arguments()
             .iter()
             .filter(|a| a.is_required() && !self.arguments.contains_key(&Key::from(a.get_name())))
-            .map(|a| a.get_name())
+            .map(super::input_argument::InputArgument::get_name)
             .collect();
         if !missing.is_empty() {
             return Err(ConsoleError::Runtime(format!(
@@ -740,7 +740,7 @@ impl Input {
                 .definition
                 .get_arguments()
                 .iter()
-                .map(|a| a.get_name())
+                .map(super::input_argument::InputArgument::get_name)
                 .collect();
             let mut command_name: Option<String> = None;
             if all.first() == Some(&"command") {
@@ -819,7 +819,10 @@ impl Input {
             )));
         }
         let mut value: Value = value.map_or(Value::Null, Value::String);
-        let empty = value.is_null() || value.as_string().is_some_and(|s| s.is_empty());
+        let empty = value.is_null()
+            || value
+                .as_string()
+                .is_some_and(php_value::PhpString::is_empty);
         if empty && option.accept_value() && !parsed.is_empty() {
             // if option accepts an optional or mandatory argument
             // let's see if there is one provided

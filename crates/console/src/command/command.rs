@@ -254,7 +254,7 @@ impl Command {
             usages: Vec::new(),
             helper_set: None,
         };
-        command.with_handler_mut(|h, c| h.before_construct(c))?;
+        command.with_handler_mut(CommandHandler::before_construct)?;
 
         let attribute = command.get_command_attribute(code.as_ref())?;
 
@@ -307,7 +307,7 @@ impl Command {
             command.add_usage(&usage);
         }
 
-        command.with_handler_mut(|h, c| h.configure(c))?;
+        command.with_handler_mut(CommandHandler::configure)?;
         Ok(command)
     }
 
@@ -471,7 +471,7 @@ impl Command {
         Ok(())
     }
 
-    /// `setDefinition($definition)` with an InputDefinition.
+    /// `setDefinition($definition)` with an `InputDefinition`.
     pub fn set_definition(&mut self, definition: InputDefinition) -> &mut Self {
         self.definition = definition;
         self.full_definition = None;
@@ -569,7 +569,7 @@ impl Command {
 
     /// `setDescription($description)`.
     pub fn set_description(&mut self, description: &str) -> &mut Self {
-        self.description = description.to_owned();
+        description.clone_into(&mut self.description);
         self
     }
 
@@ -580,7 +580,7 @@ impl Command {
 
     /// `setHelp($help)`.
     pub fn set_help(&mut self, help: &str) -> &mut Self {
-        self.help = help.to_owned();
+        help.clone_into(&mut self.help);
         self
     }
 
@@ -697,7 +697,7 @@ impl Command {
                 )));
             }
             if attribute.is_none() {
-                attribute = method.class_attribute.clone();
+                attribute.clone_from(&method.class_attribute);
             }
         } else if let Some(attr) = &mut attribute
             && let Some(prefix) = method

@@ -1,9 +1,9 @@
 //! Replays tests/data/builtins.json, recorded from PHP 8.4.27 with
 //! symfony/console v8.1.9 (`scripts/record.sh console`,
-//! oracle/recorders/console_builtins.php): `stripcslashes()`, StringInput's
+//! `oracle/recorders/console_builtins.php`): `stripcslashes()`, `StringInput`'s
 //! tokens, `levenshtein()`, `strnatcasecmp()`, `<=>` of two strings,
-//! OutputWrapper::wrap(), and
-//! Application::find() / findNamespace() on a fixed set of commands.
+//! `OutputWrapper::wrap()`, and
+//! `Application::find()` / `findNamespace()` on a fixed set of commands.
 //!
 //! Upstream: none
 

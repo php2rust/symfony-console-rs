@@ -275,8 +275,7 @@ impl OutputFormatter {
 fn add_line_breaks(text: &str, width: usize) -> String {
     UnicodeString::new(text)
         .wordwrap(i64::try_from(width).unwrap_or(i64::MAX), "\n", true)
-        .map(UnicodeString::into_string)
-        .unwrap_or_else(|_| text.to_owned())
+        .map_or_else(|_| text.to_owned(), UnicodeString::into_string)
 }
 
 /// `strtr($output, ["\0" => '\\', '\\<' => '<', '\\>' => '>'])`.

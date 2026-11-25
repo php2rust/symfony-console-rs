@@ -109,7 +109,7 @@ impl TableStyle {
                 "The padding char must not be empty.".to_owned(),
             ));
         }
-        self.padding_char = padding_char.to_owned();
+        padding_char.clone_into(&mut self.padding_char);
         Ok(self)
     }
 
@@ -123,15 +123,19 @@ impl TableStyle {
         outside: &str,
         inside: Option<&str>,
     ) -> &mut Self {
-        self.horizontal_outside_border_char = outside.to_owned();
-        self.horizontal_inside_border_char = inside.unwrap_or(outside).to_owned();
+        outside.clone_into(&mut self.horizontal_outside_border_char);
+        inside
+            .unwrap_or(outside)
+            .clone_into(&mut self.horizontal_inside_border_char);
         self
     }
 
     /// `setVerticalBorderChars($outside, $inside)`.
     pub fn set_vertical_border_chars(&mut self, outside: &str, inside: Option<&str>) -> &mut Self {
-        self.vertical_outside_border_char = outside.to_owned();
-        self.vertical_inside_border_char = inside.unwrap_or(outside).to_owned();
+        outside.clone_into(&mut self.vertical_outside_border_char);
+        inside
+            .unwrap_or(outside)
+            .clone_into(&mut self.vertical_inside_border_char);
         self
     }
 
@@ -164,18 +168,24 @@ impl TableStyle {
         top_mid_bottom: Option<&str>,
         top_right_bottom: Option<&str>,
     ) -> &mut Self {
-        self.crossing_char = cross.to_owned();
-        self.crossing_top_left_char = top_left.to_owned();
-        self.crossing_top_mid_char = top_mid.to_owned();
-        self.crossing_top_right_char = top_right.to_owned();
-        self.crossing_mid_right_char = mid_right.to_owned();
-        self.crossing_bottom_right_char = bottom_right.to_owned();
-        self.crossing_bottom_mid_char = bottom_mid.to_owned();
-        self.crossing_bottom_left_char = bottom_left.to_owned();
-        self.crossing_mid_left_char = mid_left.to_owned();
-        self.crossing_top_left_bottom_char = top_left_bottom.unwrap_or(mid_left).to_owned();
-        self.crossing_top_mid_bottom_char = top_mid_bottom.unwrap_or(cross).to_owned();
-        self.crossing_top_right_bottom_char = top_right_bottom.unwrap_or(mid_right).to_owned();
+        cross.clone_into(&mut self.crossing_char);
+        top_left.clone_into(&mut self.crossing_top_left_char);
+        top_mid.clone_into(&mut self.crossing_top_mid_char);
+        top_right.clone_into(&mut self.crossing_top_right_char);
+        mid_right.clone_into(&mut self.crossing_mid_right_char);
+        bottom_right.clone_into(&mut self.crossing_bottom_right_char);
+        bottom_mid.clone_into(&mut self.crossing_bottom_mid_char);
+        bottom_left.clone_into(&mut self.crossing_bottom_left_char);
+        mid_left.clone_into(&mut self.crossing_mid_left_char);
+        top_left_bottom
+            .unwrap_or(mid_left)
+            .clone_into(&mut self.crossing_top_left_bottom_char);
+        top_mid_bottom
+            .unwrap_or(cross)
+            .clone_into(&mut self.crossing_top_mid_bottom_char);
+        top_right_bottom
+            .unwrap_or(mid_right)
+            .clone_into(&mut self.crossing_top_right_bottom_char);
         self
     }
 
@@ -207,7 +217,7 @@ impl TableStyle {
     }
 
     pub fn set_cell_header_format(&mut self, format: &str) -> &mut Self {
-        self.cell_header_format = format.to_owned();
+        format.clone_into(&mut self.cell_header_format);
         self
     }
 
@@ -216,7 +226,7 @@ impl TableStyle {
     }
 
     pub fn set_cell_row_format(&mut self, format: &str) -> &mut Self {
-        self.cell_row_format = format.to_owned();
+        format.clone_into(&mut self.cell_row_format);
         self
     }
 
@@ -225,7 +235,7 @@ impl TableStyle {
     }
 
     pub fn set_cell_row_content_format(&mut self, format: &str) -> &mut Self {
-        self.cell_row_content_format = format.to_owned();
+        format.clone_into(&mut self.cell_row_content_format);
         self
     }
 
@@ -234,7 +244,7 @@ impl TableStyle {
     }
 
     pub fn set_border_format(&mut self, format: &str) -> &mut Self {
-        self.border_format = format.to_owned();
+        format.clone_into(&mut self.border_format);
         self
     }
 
@@ -262,7 +272,7 @@ impl TableStyle {
     }
 
     pub fn set_header_title_format(&mut self, format: &str) -> &mut Self {
-        self.header_title_format = format.to_owned();
+        format.clone_into(&mut self.header_title_format);
         self
     }
 
@@ -271,7 +281,7 @@ impl TableStyle {
     }
 
     pub fn set_footer_title_format(&mut self, format: &str) -> &mut Self {
-        self.footer_title_format = format.to_owned();
+        format.clone_into(&mut self.footer_title_format);
         self
     }
 

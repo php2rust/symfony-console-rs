@@ -4,7 +4,7 @@
 //! The algorithm is upstream's, step by step. PHP's row and cell arrays
 //! are `Arr`s: ordered maps with integer keys, so `isset()`, `$a[] =`,
 //! `array_splice()` (which renumbers) and `array_replace_recursive()` keep
-//! their meaning. A row is cells, a TableSeparator, or the divider that
+//! their meaning. A row is cells, a `TableSeparator`, or the divider that
 //! `render()` puts between the headers and the rows (`$divider === $row`).
 //!
 //! The style registry (`setStyleDefinition()`) is per thread, as the
@@ -123,7 +123,7 @@ pub type Cells = Arr<Cell>;
 #[derive(Debug, Clone, PartialEq)]
 pub enum Row {
     Cells(Cells),
-    /// A TableSeparator given as a row.
+    /// A `TableSeparator` given as a row.
     Separator(TableCell),
     /// `render()`'s divider between the headers and the rows.
     Divider,
@@ -239,7 +239,7 @@ impl<'a> Table<'a> {
         Ok(self)
     }
 
-    /// `setStyle($style)` with a TableStyle.
+    /// `setStyle($style)` with a `TableStyle`.
     pub fn set_table_style(&mut self, style: TableStyle) -> &mut Self {
         self.style = style;
         self
@@ -257,7 +257,7 @@ impl<'a> Table<'a> {
         Ok(self)
     }
 
-    /// `setColumnStyle($columnIndex, $style)` with a TableStyle.
+    /// `setColumnStyle($columnIndex, $style)` with a `TableStyle`.
     pub fn set_column_table_style(&mut self, column_index: i64, style: TableStyle) -> &mut Self {
         self.column_styles.insert(column_index, style);
         self
@@ -337,7 +337,7 @@ impl<'a> Table<'a> {
         self
     }
 
-    /// `appendRow($row)`: needs a ConsoleSectionOutput, which is not
+    /// `appendRow($row)`: needs a `ConsoleSectionOutput`, which is not
     /// ported, so it is always refused as PHP refuses another output.
     pub fn append_row(&mut self, _row: Row) -> Result<&mut Self> {
         Err(ConsoleError::Runtime(
@@ -754,7 +754,7 @@ impl<'a> Table<'a> {
         {
             // add the width of the following columns(numbers of colspan).
             let separator_width = self.get_column_separator_width()?;
-            for next_column in column + 1..=column + table_cell.get_colspan() - 1 {
+            for next_column in (column + 1)..(column + table_cell.get_colspan()) {
                 width += separator_width + effective(next_column);
             }
         }
@@ -777,12 +777,11 @@ impl<'a> Table<'a> {
         let mut pad_type = style.get_pad_type();
         if let Some(cell_style) = cell.as_table_cell().and_then(TableCell::get_style) {
             if !styled_by_tag(&text)? {
-                cell_format = match cell_style.get_cell_format() {
-                    Some(format) => format.to_owned(),
-                    None => {
-                        let tag = http_build_query(&cell_style.get_tag_options(), ";");
-                        format!("<{tag}>%s</>")
-                    }
+                cell_format = if let Some(format) = cell_style.get_cell_format() {
+                    format.to_owned()
+                } else {
+                    let tag = http_build_query(&cell_style.get_tag_options(), ";");
+                    format!("<{tag}>%s</>")
                 };
 
                 if content.contains("</>") {

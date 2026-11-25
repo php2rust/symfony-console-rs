@@ -1,7 +1,7 @@
-//! Port of symfony/string's UnicodeStringTest: AbstractAsciiTestCase's and
-//! AbstractUnicodeTestCase's tests on UnicodeString with
-//! UnicodeStringTest's providers (tests/data/unicode_string_test.json),
-//! and UnicodeStringTest's own tests.
+//! Port of symfony/string's `UnicodeStringTest`: `AbstractAsciiTestCase`'s and
+//! `AbstractUnicodeTestCase`'s tests on `UnicodeString` with
+//! `UnicodeStringTest`'s providers (`tests/data/unicode_string_test.json`),
+//! and `UnicodeStringTest`'s own tests.
 //!
 //! Upstream: symfony/string Tests/UnicodeStringTest.php
 #![allow(non_snake_case)]

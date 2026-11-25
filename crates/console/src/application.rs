@@ -21,6 +21,7 @@
 //!
 //! Upstream: symfony/console Application.php
 
+use std::fmt::Write as _;
 use std::sync::{Arc, Mutex, MutexGuard, PoisonError};
 
 use php_value::Value;
@@ -273,7 +274,7 @@ impl Application {
 
     /// `setName($name)`.
     pub fn set_name(&mut self, name: &str) {
-        lock(&self.handle.0).name = name.to_owned();
+        name.clone_into(&mut lock(&self.handle.0).name);
     }
 
     /// `getVersion()`.
@@ -283,7 +284,7 @@ impl Application {
 
     /// `setVersion($version)`.
     pub fn set_version(&mut self, version: &str) {
-        lock(&self.handle.0).version = version.to_owned();
+        version.clone_into(&mut lock(&self.handle.0).version);
     }
 
     /// `getLongVersion()` (no container, so no environment part).
@@ -508,7 +509,8 @@ impl Application {
                 // remove hidden commands
                 alternatives.retain(|n| self.lookup(n).is_some_and(|c| !c.lock().is_hidden()));
                 if !alternatives.is_empty() {
-                    message.push_str(&format!(
+                    let _ = write!(
+                        message,
                         "\n\nDid you mean {}?\n    {}",
                         if alternatives.len() == 1 {
                             "this"
@@ -516,7 +518,7 @@ impl Application {
                             "one of these"
                         },
                         alternatives.join("\n    ")
-                    ));
+                    );
                 }
             }
 
@@ -750,7 +752,7 @@ fn default_input_definition(default_command: &str) -> Result<InputDefinition> {
 }
 
 /// `getDefaultHelperSet()`: the formatter helper. PHP's set also has
-/// DebugFormatterHelper, ProcessHelper and QuestionHelper (M7).
+/// `DebugFormatterHelper`, `ProcessHelper` and `QuestionHelper` (M7).
 fn default_helper_set() -> Arc<HelperSet> {
     Arc::new(HelperSet::new(vec![(None, Arc::new(FormatterHelper))]))
 }

@@ -1,10 +1,16 @@
-//! TableTest, TableStyleTest and TableCellStyleTest, with upstream's
+//! `TableTest`, `TableStyleTest` and `TableCellStyleTest`, with upstream's
 //! names and assertions. The data providers are replayed from
-//! tests/data/table_test.json, recorded on the oracle
-//! (`scripts/record.sh console`); TableCell, TableSeparator and
-//! TableCellStyle objects arrive with their options.
+//! `tests/data/table_test.json`, recorded on the oracle
+//! (`scripts/record.sh console`); `TableCell`, `TableSeparator` and
+//! `TableCellStyle` objects arrive with their options.
 //!
 //! Upstream: symfony/console Tests/Helper/TableTest.php Tests/Helper/TableStyleTest.php Tests/Helper/TableCellStyleTest.php
+
+#![allow(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    reason = "test helpers; a panic is a test failure"
+)]
 #![allow(non_snake_case)]
 
 mod common;
@@ -205,7 +211,7 @@ fn testRowSeparator() -> R {
         table.render()?;
         let ret: *const Table<'_> = table.add_row(Row::separator());
         assert!(
-            std::ptr::eq(ret, &table),
+            std::ptr::eq(ret, &raw const table),
             "fluent interface on addRow() with a single TableSeparator() works"
         );
     }

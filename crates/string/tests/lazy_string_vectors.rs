@@ -1,6 +1,6 @@
-//! LazyString where LazyStringTest leaves it open, against the answers
+//! `LazyString` where `LazyStringTest` leaves it open, against the answers
 //! recorded from PHP (`tests/data/lazy.json`, `oracle/recorders/string_lazy.php`):
-//! each kind of return value, the TypeError texts with each kind of
+//! each kind of return value, the `TypeError` texts with each kind of
 //! callable's name, retries and memoization, the `fromCallable()` array
 //! check, `fromStringable()`, `resolve()`, `isStringable()`, JSON and
 //! `serialize()`. Every recorded case is replayed, or listed in
@@ -485,7 +485,7 @@ fn replay() -> Vec<(String, Outcome)> {
     out
 }
 
-/// PHP's TypeError for a user function's argument ends with ", called in
+/// PHP's `TypeError` for a user function's argument ends with ", called in
 /// FILE on line N", which a Rust caller has no file or line for.
 fn without_called_in(message: &str) -> &str {
     match message.rfind(", called in FILE on line ") {

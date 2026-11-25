@@ -1,5 +1,5 @@
-//! OutputFormatterTest, OutputFormatterStyleTest and
-//! OutputFormatterStyleStackTest, with upstream's names, assertions and
+//! `OutputFormatterTest`, `OutputFormatterStyleTest` and
+//! `OutputFormatterStyleStackTest`, with upstream's names, assertions and
 //! provider rows (transcribed: they are literals).
 //!
 //! Upstream: symfony/console Tests/Formatter/OutputFormatterTest.php Tests/Formatter/OutputFormatterStyleTest.php Tests/Formatter/OutputFormatterStyleStackTest.php

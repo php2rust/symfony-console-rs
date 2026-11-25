@@ -60,7 +60,7 @@ fn option(name: &str, mode: i64, description: &str, default: Value) -> Result<In
 pub struct HelpCommand;
 
 impl CommandHandler for HelpCommand {
-    fn class(&self) -> &str {
+    fn class(&self) -> &'static str {
         "Symfony\\Component\\Console\\Command\\HelpCommand"
     }
 
@@ -120,7 +120,7 @@ impl CommandHandler for HelpCommand {
 pub struct ListCommand;
 
 impl CommandHandler for ListCommand {
-    fn class(&self) -> &str {
+    fn class(&self) -> &'static str {
         "Symfony\\Component\\Console\\Command\\ListCommand"
     }
 
@@ -192,7 +192,7 @@ impl CommandHandler for ListCommand {
 pub struct CompleteCommand;
 
 impl CommandHandler for CompleteCommand {
-    fn class(&self) -> &str {
+    fn class(&self) -> &'static str {
         "Symfony\\Component\\Console\\Command\\CompleteCommand"
     }
 
@@ -271,7 +271,7 @@ const SUPPORTED_SHELLS: [&str; 3] = ["bash", "fish", "zsh"];
 use php_value::path::basename_str as basename;
 
 impl CommandHandler for DumpCompletionCommand {
-    fn class(&self) -> &str {
+    fn class(&self) -> &'static str {
         "Symfony\\Component\\Console\\Command\\DumpCompletionCommand"
     }
 

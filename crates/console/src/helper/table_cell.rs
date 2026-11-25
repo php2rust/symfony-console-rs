@@ -14,7 +14,7 @@ use php_value::{Value, numeric::float_to_string};
 use super::table_style::PadType;
 use crate::exception::{ConsoleError, Result};
 
-/// A TableCell option's value.
+/// A `TableCell` option's value.
 #[derive(Debug, Clone, PartialEq)]
 pub enum CellOption {
     /// `rowspan` or `colspan`, as PHP's `(int)` of the value given.
@@ -23,7 +23,7 @@ pub enum CellOption {
     Null,
 }
 
-/// `TableCell` (and `TableSeparator`, which is a TableCell).
+/// `TableCell` (and `TableSeparator`, which is a `TableCell`).
 #[derive(Debug, Clone, PartialEq)]
 pub struct TableCell {
     value: String,
@@ -223,7 +223,7 @@ impl TableCellStyle {
 }
 
 /// A cell of a Table row: a scalar, null or another value as PHP holds
-/// it, or a TableCell (a TableSeparator included).
+/// it, or a `TableCell` (a `TableSeparator` included).
 #[derive(Debug, Clone, PartialEq)]
 pub enum Cell {
     Value(Value),
@@ -253,7 +253,7 @@ impl Cell {
         self.as_table_cell().is_some_and(TableCell::is_separator)
     }
 
-    /// The colspan of a TableCell, else 1.
+    /// The colspan of a `TableCell`, else 1.
     pub fn colspan(&self) -> i64 {
         self.as_table_cell().map_or(1, TableCell::get_colspan)
     }
@@ -275,7 +275,7 @@ impl Cell {
         }
     }
 
-    /// `if ($cell)`: a TableCell is an object, so always true.
+    /// `if ($cell)`: a `TableCell` is an object, so always true.
     pub fn truthy(&self) -> bool {
         match self {
             Self::Table(_) => true,
@@ -290,7 +290,7 @@ impl Cell {
         }
     }
 
-    /// Whether `fillNextRows()` accepts the cell: null, a TableCell, a
+    /// Whether `fillNextRows()` accepts the cell: null, a `TableCell`, a
     /// scalar or a Stringable.
     pub fn check(&self) -> Result<()> {
         match self {

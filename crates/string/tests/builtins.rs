@@ -1,10 +1,10 @@
 //! The PHP functions symfony/string calls, against the answers recorded
 //! from PHP 8.4.27 (tests/data/builtins.json, oracle/recorders/
-//! string_builtins.php, `scripts/record.sh string`): the str*pos(),
-//! mb_*pos() and grapheme_*pos() families with every offset, mb_substr(),
-//! grapheme_substr(), grapheme_extract(), grapheme_str_split(), whole-string
-//! case mapping, str_pad(), ucwords(), ucfirst(), lcfirst(), substr(),
-//! substr_replace(), trim() with ranges, the normalizer forms, and the
+//! `string_builtins.php`, `scripts/record.sh string`): the str*`pos()`,
+//! mb_*`pos()` and grapheme_*`pos()` families with every offset, `mb_substr()`,
+//! `grapheme_substr()`, `grapheme_extract()`, `grapheme_str_split()`, whole-string
+//! case mapping, `str_pad()`, `ucwords()`, `ucfirst()`, `lcfirst()`, `substr()`,
+//! `substr_replace()`, `trim()` with ranges, the normalizer forms, and the
 //! Windows-1252 / windows-1250 code pages.
 //!
 //! Upstream: none
@@ -20,9 +20,9 @@ fn data() -> Json {
 }
 
 /// Calls whose answer differs from PHP's, as the README's "Differences"
-/// lists them, in the grapheme_*pos() family: ICU folds the ligature
+/// lists them, in the grapheme_*`pos()` family: ICU folds the ligature
 /// U+FB01 like "fi" (and still does not fold U+00DF like "ss"), and
-/// grapheme_strrpos() of a needle of ignorable code points only fails on
+/// `grapheme_strrpos()` of a needle of ignorable code points only fails on
 /// a haystack ending in a combining sequence.
 fn known_difference(f: &str, h: &str, n: &str) -> bool {
     let ligature = f.ends_with("ipos") && h.contains('\u{FB01}') && (n == "fi" || n == "\u{FB01}");

@@ -1,6 +1,6 @@
-//! Port of symfony/string's CodePointStringTest: AbstractAsciiTestCase's
-//! and AbstractUnicodeTestCase's tests on CodePointString with
-//! CodePointStringTest's providers (tests/data/code_point_string_test.json).
+//! Port of symfony/string's `CodePointStringTest`: `AbstractAsciiTestCase`'s
+//! and `AbstractUnicodeTestCase`'s tests on `CodePointString` with
+//! `CodePointStringTest`'s providers (`tests/data/code_point_string_test.json`).
 //!
 //! Upstream: symfony/string Tests/CodePointStringTest.php
 #![allow(non_snake_case)]

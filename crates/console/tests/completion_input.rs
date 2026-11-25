@@ -1,4 +1,4 @@
-//! CompletionInputTest, with upstream's names, assertions and provider rows.
+//! `CompletionInputTest`, with upstream's names, assertions and provider rows.
 //!
 //! Upstream: symfony/console Tests/Completion/CompletionInputTest.php
 #![allow(non_snake_case)]

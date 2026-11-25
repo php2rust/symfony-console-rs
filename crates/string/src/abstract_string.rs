@@ -8,7 +8,7 @@
 //! [`UnicodeString`](crate::UnicodeString) implement. `string|iterable`
 //! arguments are a [`Needle`]; a callable `$to` is a [`Replacement`].
 //! Strings are bytes (`&[u8]`, `impl AsRef<[u8]>`), as in PHP: a
-//! ByteString holds any bytes, the Unicode classes refuse invalid UTF-8.
+//! `ByteString` holds any bytes, the Unicode classes refuse invalid UTF-8.
 //!
 //! PHP's `clone` resets `ignoreCase` (`__clone()`), so every method returns
 //! a case-sensitive string except [`AbstractString::ignore_case`].
@@ -565,7 +565,7 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
         self.preg_split(delimiter, limit, flags | SPLIT_OFFSET_CAPTURE)
     }
 
-    /// AbstractString::split() with flags: `preg_split()`.
+    /// `AbstractString::split()` with flags: `preg_split()`.
     fn preg_split(&self, delimiter: &[u8], limit: i64, flags: i64) -> Result<OffsetChunks<Self>> {
         let mut pattern = delimiter.to_vec();
         if Self::UNICODE {

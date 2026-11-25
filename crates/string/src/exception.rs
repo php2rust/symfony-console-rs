@@ -39,7 +39,7 @@ pub enum Error {
     Runtime(RuntimeException),
     /// A PHP `\Error` (`ValueError`, `TypeError`) from a native function
     /// upstream calls without catching it, e.g. `str_pad()` with an empty
-    /// pad on a ByteString.
+    /// pad on a `ByteString`.
     Php(String),
     /// Input PHP accepts that this port does not reproduce (a pattern
     /// feature php-pcre does not translate, an ICU transliterator).

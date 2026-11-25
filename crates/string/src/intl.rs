@@ -1,12 +1,12 @@
 //! PHP's intl functions as symfony/string calls them: the `Normalizer`
-//! forms (`normalizer_normalize()`, `normalizer_is_normalized()`, NFKC_CF
+//! forms (`normalizer_normalize()`, `normalizer_is_normalized()`, `NFKC_CF`
 //! included) and the grapheme functions (`grapheme_strlen()`,
 //! `grapheme_substr()`, the `grapheme_*pos()` family, `grapheme_extract()`
 //! with `GRAPHEME_EXTR_MAXBYTES`, `grapheme_str_split()`).
 //!
 //! NFC, NFD, NFKC and NFKD come from `unicode-normalization` and grapheme
 //! clusters from `unicode-segmentation` (PLAN.md stack row), checked
-//! against the oracle's ICU 72.1 (`tests/unicode.rs`); NFKC_CF applies
+//! against the oracle's ICU 72.1 (`tests/unicode.rs`); `NFKC_CF` applies
 //! ICU's per-code-point mapping recorded from the oracle (`case_tables.rs`)
 //! and recomposes. The functions are written from the PHP manual (no
 //! php-src, PLAN.md decision 8) and checked against
@@ -135,13 +135,13 @@ pub fn str_split(s: &str) -> Vec<&str> {
     s.graphemes(true).collect()
 }
 
-/// Whether ICU's collation ignores `c` when grapheme_*pos() compares:
-/// the code points NFKC_CF removes (default ignorables such as U+200B).
+/// Whether ICU's collation ignores `c` when grapheme_*`pos()` compares:
+/// the code points `NFKC_CF` removes (default ignorables such as U+200B).
 fn ignorable(c: char) -> bool {
     mb::in_ranges(t::NFKC_CF_REMOVED, c as u32)
 }
 
-/// What grapheme_*pos() compares: the canonical decomposition without
+/// What grapheme_*`pos()` compares: the canonical decomposition without
 /// ignorable code points, case folded (simple folding) with `ci`.
 fn key(s: &str, ci: bool) -> String {
     let folded;

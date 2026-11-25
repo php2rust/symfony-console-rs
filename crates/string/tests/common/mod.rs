@@ -1,8 +1,8 @@
-//! What the ports of ByteStringTest, CodePointStringTest and
-//! UnicodeStringTest share: their data providers as the oracle returns
+//! What the ports of `ByteStringTest`, `CodePointStringTest` and
+//! `UnicodeStringTest` share: their data providers as the oracle returns
 //! them (`tests/data/*_test.json`, `scripts/record.sh string`), read as
-//! typed values, and the test methods of AbstractAsciiTestCase and
-//! AbstractUnicodeTestCase as macros, with upstream's names and
+//! typed values, and the test methods of `AbstractAsciiTestCase` and
+//! `AbstractUnicodeTestCase` as macros, with upstream's names and
 //! assertions.
 //!
 //! Upstream: symfony/string Tests/AbstractAsciiTestCase.php Tests/AbstractUnicodeTestCase.php
@@ -83,8 +83,10 @@ impl Arg {
             Arg::Object(_, props) => props
                 .iter()
                 .find(|(k, _)| *k == Arg::Str(b"string".to_vec()))
-                .map(|(_, v)| v.bytes())
-                .unwrap_or_else(|| panic!("object without string: {self:?}")),
+                .map_or_else(
+                    || panic!("object without string: {self:?}"),
+                    |(_, v)| v.bytes(),
+                ),
             other => panic!("not a string: {other:?}"),
         }
     }
@@ -183,7 +185,7 @@ pub fn create<S: AbstractString>(s: impl AsRef<[u8]>) -> S {
         .unwrap_or_else(|e| panic!("create {:?}: {e}", String::from_utf8_lossy(s.as_ref())))
 }
 
-/// The tests of AbstractAsciiTestCase, for `$S` and its providers.
+/// The tests of `AbstractAsciiTestCase`, for `$S` and its providers.
 #[macro_export]
 macro_rules! ascii_tests {
     ($S:ty, $json:expr, normalize: $normalize:expr) => {
@@ -926,7 +928,7 @@ macro_rules! ascii_tests {
     };
 }
 
-/// The tests AbstractUnicodeTestCase adds.
+/// The tests `AbstractUnicodeTestCase` adds.
 #[macro_export]
 macro_rules! unicode_tests {
     () => {

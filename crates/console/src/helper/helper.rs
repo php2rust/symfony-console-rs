@@ -97,7 +97,7 @@ fn remove_hyperlinks(s: &str) -> String {
             continue 'search;
         }
         // No match here: keep this ESC and look further on.
-        out.push_str(&rest[..at + 1]);
+        out.push_str(&rest[..=at]);
         rest = &rest[at + 1..];
     }
     out.push_str(rest);

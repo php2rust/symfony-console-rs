@@ -1,10 +1,10 @@
 //! Port of Symfony\Component\Console\Tester\CommandTester.php and the
 //! parts of Tester/TesterTrait.php it uses with `execute()`.
 //!
-//! The output is a StreamOutput over memory (`php://memory`). Not ported
-//! (M7): `setInputs()` and the input stream (they feed QuestionHelper),
-//! `capture_stderr_separately` (ConsoleOutput), `run()` with
-//! ExecutionResult, and the PHPUnit constraints.
+//! The output is a `StreamOutput` over memory (`php://memory`). Not ported
+//! (M7): `setInputs()` and the input stream (they feed `QuestionHelper`),
+//! `capture_stderr_separately` (`ConsoleOutput`), `run()` with
+//! `ExecutionResult`, and the PHPUnit constraints.
 //!
 //! Symfony source copyright (c) Fabien Potencier; distributed under MIT.
 //!

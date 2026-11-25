@@ -1,4 +1,4 @@
-//! OutputWrapperTest, with upstream's names, assertions and provider rows.
+//! `OutputWrapperTest`, with upstream's names, assertions and provider rows.
 //!
 //! Upstream: symfony/console Tests/Helper/OutputWrapperTest.php
 #![allow(non_snake_case)]

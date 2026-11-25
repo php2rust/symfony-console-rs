@@ -1,5 +1,5 @@
 //! PHP's native string functions as symfony/string calls them, on bytes:
-//! `wordwrap()` (on AbstractString::wordwrap()'s ASCII mask), the case
+//! `wordwrap()` (on `AbstractString::wordwrap()`'s ASCII mask), the case
 //! functions (`strtolower()`, `ucfirst()`, `ucwords()`, ASCII-only and
 //! locale-independent since PHP 8.2), `str_pad()`, `substr()`,
 //! `substr_replace()`, `substr_compare()`, the `str*pos()` family, the
@@ -12,7 +12,7 @@
 //! throws a `\ValueError` (an offset outside the haystack), these return
 //! `None`, which is what symfony/string turns it into.
 //!
-//! wordwrap(), from the manual: the string is wrapped at `width`
+//! `wordwrap()`, from the manual: the string is wrapped at `width`
 //! characters using `break`; with `cut_long_words`, words longer than
 //! `width` are split, so no line is longer than `width`. As observed:
 //! breaks already in the string start a new line; a line is filled

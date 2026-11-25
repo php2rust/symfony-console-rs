@@ -67,7 +67,7 @@ impl FormatterHelper {
 }
 
 impl HelperInterface for FormatterHelper {
-    fn get_name(&self) -> &str {
+    fn get_name(&self) -> &'static str {
         "formatter"
     }
 }

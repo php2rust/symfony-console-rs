@@ -1,4 +1,4 @@
-//! GithubActionReporterTest, with upstream's names, assertions and
+//! `GithubActionReporterTest`, with upstream's names, assertions and
 //! provider rows.
 //!
 //! Upstream: symfony/console Tests/CI/GithubActionReporterTest.php

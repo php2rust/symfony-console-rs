@@ -62,7 +62,9 @@ pub fn server_argv() -> std::result::Result<Vec<String>, std::ffi::OsString> {
     if let Some(argv) = OVERLAY.with(|o| o.borrow().argv.clone()) {
         return Ok(argv);
     }
-    std::env::args_os().map(|arg| arg.into_string()).collect()
+    std::env::args_os()
+        .map(std::ffi::OsString::into_string)
+        .collect()
 }
 
 /// `$_SERVER['argv'] = $argv`; `None` reads the process's arguments again.
