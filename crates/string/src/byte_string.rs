@@ -59,6 +59,11 @@ impl ByteString {
 
     /// `fromRandom()` with `random` filling a buffer with uniformly random
     /// bytes in place of the operating system's source.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     pub fn from_random_with(
         length: i64,
         alphabet: Option<&[u8]>,
@@ -186,6 +191,12 @@ impl AbstractString for ByteString {
         }
     }
 
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn bytes_at(&self, offset: i64) -> Vec<u8> {
         // $this->string[$offset] ?? '': a negative offset counts from the end
         let len = self.string.len() as i64;
@@ -229,6 +240,11 @@ impl AbstractString for ByteString {
         Ok(self.with_string(parts.concat()))
     }
 
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn chunk(&self, length: i64) -> Result<Vec<Self>> {
         if length < 1 {
             return Err(Error::invalid(
@@ -244,6 +260,10 @@ impl AbstractString for ByteString {
             .collect())
     }
 
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn ends_with_str(&self, suffix: &[u8]) -> bool {
         !suffix.is_empty()
             && self.string.len() >= suffix.len()

@@ -149,6 +149,12 @@ pub fn str_pad(s: &[u8], length: i64, pad: &[u8], kind: PadType) -> Option<Vec<u
 /// The range `substr($s, $start, $length)` returns, for a string of `len`
 /// units: a negative start counts from the end; a negative length leaves
 /// that many units off the end; out of range gives an empty range.
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn substr_range(len: usize, start: i64, length: Option<i64>) -> (usize, usize) {
     let len_i = len as i64;
     let from = if start < 0 {
@@ -174,6 +180,12 @@ pub fn substr(s: &[u8], start: i64, length: Option<i64>) -> &[u8] {
 }
 
 /// `substr_replace($s, $replacement, $start, $length)`.
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn substr_replace(s: &[u8], replacement: &[u8], start: i64, length: Option<i64>) -> Vec<u8> {
     let len = s.len() as i64;
     let from = if start < 0 {
@@ -216,6 +228,12 @@ pub(crate) fn find_from(h: &[u8], n: &[u8], from: usize) -> Option<usize> {
 
 /// `strpos($h, $n, $offset)` (`stripos()` with `ci`). `None` for no match
 /// and for an offset outside the haystack (a `ValueError` in PHP).
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn strpos(h: &[u8], n: &[u8], offset: i64, ci: bool) -> Option<usize> {
     let len = h.len() as i64;
     let offset = if offset < 0 { offset + len } else { offset };
@@ -229,6 +247,12 @@ pub fn strpos(h: &[u8], n: &[u8], offset: i64, ci: bool) -> Option<usize> {
 /// units: a non-negative offset is the lowest start; a negative one counts
 /// from the end and bounds the start from above. `None` when PHP throws a
 /// `ValueError` (the offset is outside the haystack).
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn rpos_bounds(len: usize, needle_len: usize, offset: i64) -> Option<(usize, usize)> {
     let len_i = len as i64;
     if offset > len_i || offset < -len_i {
@@ -272,6 +296,12 @@ pub fn strncmp_eq(a: &[u8], b: &[u8], n: usize, ci: bool) -> bool {
 
 /// `substr_compare($main, $str, $offset, $length, $ci) === 0`. `None` for
 /// an offset outside `$main` (a `ValueError`).
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn substr_compare_eq(
     main: &[u8],
     s: &[u8],
@@ -316,6 +346,10 @@ pub fn str_replace(from: &[u8], to: &[u8], s: &[u8], ci: bool) -> Vec<u8> {
 
 /// `explode($delimiter, $s, $limit)` for a positive limit and a non-empty
 /// delimiter.
+#[expect(
+    clippy::cast_possible_wrap,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn explode<'a>(delimiter: &[u8], s: &'a [u8], limit: i64) -> Vec<&'a [u8]> {
     let mut out = Vec::new();
     let mut rest = s;

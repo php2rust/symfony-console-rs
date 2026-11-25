@@ -5,6 +5,10 @@
 //!
 //! Upstream: symfony/string Tests/LazyStringTest.php
 #![allow(non_snake_case)]
+#![allow(
+    clippy::items_after_statements,
+    reason = "test code ports PHPUnit tests and helpers as they are"
+)]
 
 use std::sync::{
     Arc,

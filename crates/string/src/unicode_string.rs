@@ -105,6 +105,7 @@ impl UnicodeString {
     }
 
     /// `folded($compat)`.
+    #[must_use]
     pub fn folded_compat(&self, compat: bool) -> Self {
         au::folded(self, compat)
     }
@@ -137,6 +138,10 @@ impl UnicodeString {
     /// `search($haystack, $needle, &$length)`: the byte offset and length of
     /// the first occurrence, as `grapheme_strpos()` finds it, corrected where
     /// its match differs from the needle.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn search(&self, haystack: &str, needle: &str) -> Option<(usize, usize)> {
         let ci = self.ci();
         let i = intl::strpos(haystack, needle, 0, ci)?;
@@ -241,6 +246,12 @@ impl AbstractString for UnicodeString {
         au::camel(self)
     }
 
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn chunk(&self, length: i64) -> Result<Vec<Self>> {
         if length < 1 {
             return Err(Error::invalid(
@@ -260,6 +271,10 @@ impl AbstractString for UnicodeString {
             .collect())
     }
 
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn ends_with_str(&self, suffix: &[u8]) -> bool {
         let Some(suffix) = self.needle(suffix) else {
             return false;
@@ -298,6 +313,10 @@ impl AbstractString for UnicodeString {
         intl::strpos(&self.string, &needle, offset, self.ci())
     }
 
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn index_of_last_str(&self, needle: &[u8], offset: i64) -> Option<usize> {
         let needle = self.needle(needle)?;
         if needle.is_empty() {
@@ -393,6 +412,12 @@ impl AbstractString for UnicodeString {
         au::snake(self)
     }
 
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn splice(&self, replacement: &[u8], start: i64, length: Option<i64>) -> Result<Self> {
         let start = if start != 0 {
             intl::substr(&self.string, 0, Some(start.clamp(I32_MIN, I32_MAX))).len() as i64
@@ -565,5 +590,5 @@ fn pcre_breaks_between(p: char, c: char) -> bool {
     // After an extending character (a virama, ZWJ or other mark), a joined
     // character that does not extend, is not an emoji after ZWJ (GB11) and
     // not a regional indicator was joined by GB9c alone.
-    extends(p) && !extends(c) && !(p == '\u{200D}' && pictographic) && !is_regional_indicator(c)
+    extends(p) && !extends(c) && (p != '\u{200D}' || !pictographic) && !is_regional_indicator(c)
 }

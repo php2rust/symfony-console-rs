@@ -190,6 +190,10 @@ fn matches(haystack: &str, needle: &str, ci: bool) -> Vec<usize> {
 /// `grapheme_strpos($h, $n, $offset)` (`grapheme_stripos()` with `ci`), in
 /// graphemes. `None` for no match and for an offset outside the haystack
 /// (a `ValueError`).
+#[expect(
+    clippy::cast_possible_wrap,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn strpos(h: &str, n: &str, offset: i64, ci: bool) -> Option<usize> {
     let len = strlen(h) as i64;
     let offset = if offset < 0 { offset + len } else { offset };
@@ -200,6 +204,10 @@ pub fn strpos(h: &str, n: &str, offset: i64, ci: bool) -> Option<usize> {
 }
 
 /// `grapheme_strrpos($h, $n, $offset)` (`grapheme_strripos()` with `ci`).
+#[expect(
+    clippy::cast_possible_wrap,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn strrpos(h: &str, n: &str, offset: i64, ci: bool) -> Option<usize> {
     let len = strlen(h) as i64;
     if offset > len || offset < -len {
@@ -221,6 +229,11 @@ pub fn strrpos(h: &str, n: &str, offset: i64, ci: bool) -> Option<usize> {
 /// whole graphemes from byte `start` (moved forward to a code point
 /// boundary) that fit in `size` bytes. `None` (`false`) for a start
 /// outside the string.
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn extract_maxbytes(s: &str, size: usize, start: i64) -> Option<&str> {
     if start < 0 || start as usize >= s.len() {
         return None;

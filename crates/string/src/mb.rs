@@ -137,6 +137,12 @@ fn chars_ci(s: &str, ci: bool) -> Vec<char> {
 /// `mb_strpos($h, $n, $offset, 'UTF-8')` (`mb_stripos()` with `ci`), in
 /// code points. `None` for no match and for an offset outside the
 /// haystack (a `ValueError`).
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn strpos(h: &str, n: &str, offset: i64, ci: bool) -> Option<usize> {
     let (h, n) = (chars_ci(h, ci), chars_ci(n, ci));
     let len = h.len() as i64;
@@ -201,6 +207,10 @@ impl CodePage {
     }
 
     /// The byte for a character, if the code page holds it.
+    #[expect(
+        clippy::cast_possible_truncation,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     pub fn encode_char(self, c: char) -> Option<u8> {
         if (c as u32) < 0x80 {
             return Some(c as u8);

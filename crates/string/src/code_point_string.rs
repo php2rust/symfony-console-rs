@@ -57,6 +57,7 @@ impl CodePointString {
     }
 
     /// `folded($compat)`.
+    #[must_use]
     pub fn folded_compat(&self, compat: bool) -> Self {
         au::folded(self, compat)
     }
@@ -119,6 +120,12 @@ impl AbstractString for CodePointString {
         au::camel(self)
     }
 
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn chunk(&self, length: i64) -> Result<Vec<Self>> {
         if length < 1 {
             return Err(Error::invalid(
@@ -262,6 +269,12 @@ impl AbstractString for CodePointString {
         au::snake(self)
     }
 
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn splice(&self, replacement: &[u8], start: i64, length: Option<i64>) -> Result<Self> {
         utf8(replacement)?;
         let start = if start != 0 {
@@ -384,6 +397,10 @@ pub(crate) fn base_trim_prefix<S: AbstractString>(s: &S, prefix: Needle) -> Resu
 }
 
 /// `AbstractString::trimSuffix()` as `parent::trimSuffix()`.
+#[expect(
+    clippy::cast_possible_wrap,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub(crate) fn base_trim_suffix<S: AbstractString>(s: &S, suffix: Needle) -> Result<S> {
     Ok(match suffix {
         Needle::Many(xs) => {

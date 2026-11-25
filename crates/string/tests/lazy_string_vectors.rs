@@ -7,6 +7,13 @@
 //! [`NOT_EXPRESSIBLE`] with the reason.
 //!
 //! Upstream: none
+#![allow(
+    clippy::cast_possible_wrap,
+    clippy::items_after_statements,
+    clippy::many_single_char_names,
+    clippy::too_many_lines,
+    reason = "test code ports PHPUnit tests and helpers as they are"
+)]
 
 use std::{
     collections::BTreeMap,

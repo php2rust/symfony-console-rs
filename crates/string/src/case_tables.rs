@@ -2,8 +2,8 @@
 //! not edit. Single code points as the oracle maps them
 //! (PHP 8.4.27, ICU 72.1, ICU Unicode 15.0, PCRE 10.44 2024-06-07):
 //! mbstring's `mb_strtolower()`, `mb_strtoupper()` and `mb_convert_case()`
-//! (title, fold, simple fold), ICU's `Normalizer::NFKC_CF`, and the Cased
-//! and Case_Ignorable ranges of `mb_strtolower()`'s final sigma rule. A
+//! (title, fold, simple fold), ICU's `Normalizer::NFKC_CF`, and the `Cased`
+//! and `Case_Ignorable` ranges of `mb_strtolower()`'s final sigma rule. A
 //! code point missing from a table maps to itself.
 //!
 //! Upstream: none

@@ -153,6 +153,11 @@ pub(crate) fn text<S: AbstractString>(s: &S) -> &str {
 
 /// `fromCodePoints(...$codes)`: each code (modulo 0x200000) as UTF-8, then
 /// `new static()`, which refuses what is not valid UTF-8.
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub(crate) fn from_code_points<S: AbstractString>(codes: &[i64]) -> Result<S> {
     let mut string = Vec::new();
     for &code in codes {
@@ -265,6 +270,12 @@ fn pad_string(pad: &[u8]) -> Result<()> {
 }
 
 /// `pad($len, $pad, $type)` after the `$padStr` checks.
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub(crate) fn pad<S: AbstractString>(s: &S, len: i64, pad: &[u8], kind: php::PadType) -> Result<S> {
     pad_string(pad)?;
     let pad = s.with_string(pad.to_vec());
@@ -415,6 +426,12 @@ pub(crate) fn trim_affix_ignore_case<S: AbstractString>(
 }
 
 /// `width($ignoreAnsiDecoration)`: the widest line, in terminal columns.
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub(crate) fn width(string: &str, ignore_ansi_decoration: bool) -> usize {
     let mut s = string.to_owned();
     if ignore_ansi_decoration && s.contains('\x07') {

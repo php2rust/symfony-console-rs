@@ -7,6 +7,11 @@
 //!
 //! Upstream: symfony/string Tests/AbstractAsciiTestCase.php Tests/AbstractUnicodeTestCase.php
 #![allow(dead_code)]
+#![allow(
+    clippy::cast_possible_truncation,
+    clippy::cast_sign_loss,
+    reason = "test code ports PHPUnit tests and helpers as they are"
+)]
 
 use php_value::base64;
 use serde_json::Value as Json;
@@ -217,6 +222,11 @@ macro_rules! ascii_tests {
             assert!(instance.is_empty());
         }
 
+        #[expect(
+            clippy::cast_possible_truncation,
+            clippy::cast_sign_loss,
+            reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+        )]
         pub(crate) fn run_testBytesAt() {
             for (name, a) in rows("testBytesAt") {
                 if !common::icu_21661_fixed() && a[1].bytes() == "नमस्ते".as_bytes() {
@@ -334,6 +344,11 @@ macro_rules! ascii_tests {
             }
         }
 
+        #[expect(
+            clippy::cast_possible_truncation,
+            clippy::cast_sign_loss,
+            reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+        )]
         pub(crate) fn run_testLength() {
             for (name, a) in rows("testLength") {
                 if !common::icu_21661_fixed() && a[1].bytes() == "अनुच्छेद".as_bytes()
@@ -909,6 +924,11 @@ macro_rules! ascii_tests {
             }
         }
 
+        #[expect(
+            clippy::cast_possible_truncation,
+            clippy::cast_sign_loss,
+            reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+        )]
         pub(crate) fn run_testWidth() {
             for (name, a) in rows("testWidth") {
                 let ignore = !matches!(a.get(2), Some(Arg::Bool(false)));
@@ -938,6 +958,11 @@ macro_rules! unicode_tests {
             assert!(S::create(b"\xE9").is_err_and(|e| e.is_invalid_argument()));
         }
 
+        #[expect(
+            clippy::cast_possible_truncation,
+            clippy::cast_sign_loss,
+            reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+        )]
         pub(crate) fn run_testCodePointsAt() {
             for (name, a) in rows("testCodePointsAt") {
                 if !common::icu_21661_fixed() && a[1].bytes() == "नमस्ते".as_bytes() {

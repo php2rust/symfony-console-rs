@@ -143,9 +143,11 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     fn as_bytes(&self) -> &[u8];
 
     /// `$str = clone $this; $str->string = $string;`.
+    #[must_use]
     fn with_string(&self, string: Vec<u8>) -> Self;
 
     /// `clone $this`.
+    #[must_use]
     fn cloned(&self) -> Self {
         self.with_string(self.as_bytes().to_vec())
     }
@@ -154,6 +156,7 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     fn ignoring_case(&self) -> bool;
 
     /// `ignoreCase()`.
+    #[must_use]
     fn ignore_case(&self) -> Self;
 
     /// Whether `$this instanceof AbstractUnicodeString`.
@@ -183,6 +186,7 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     fn equals_to_str(&self, string: &[u8]) -> bool;
 
     /// `folded()`.
+    #[must_use]
     fn folded(&self) -> Self;
 
     /// `indexOf($needle, $offset)` for one string.
@@ -198,6 +202,7 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     fn length(&self) -> usize;
 
     /// `lower()`.
+    #[must_use]
     fn lower(&self) -> Self;
 
     /// `match($regexp, $flags, $offset)`: the `$matches` array.
@@ -219,9 +224,11 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     fn replace_matches(&self, from_regexp: &[u8], to: Replacement<'_>) -> Result<Self>;
 
     /// `reverse()`.
+    #[must_use]
     fn reverse(&self) -> Self;
 
     /// `slice($start, $length)`.
+    #[must_use]
     fn slice(&self, start: i64, length: Option<i64>) -> Self;
 
     /// `snake()`.
@@ -253,6 +260,7 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     fn trim_start(&self, chars: Option<&[u8]>) -> Result<Self>;
 
     /// `upper()`.
+    #[must_use]
     fn upper(&self) -> Self;
 
     /// `width($ignoreAnsiDecoration)`.
@@ -299,6 +307,11 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `after($needle, $includeNeedle, $offset)`.
+    #[must_use]
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn after(&self, needle: impl Into<Needle>, include_needle: bool, offset: i64) -> Self {
         let needle = needle.into();
         let mut found: Option<(usize, &[u8])> = None;
@@ -319,6 +332,11 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `afterLast($needle, $includeNeedle, $offset)`.
+    #[must_use]
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn after_last(&self, needle: impl Into<Needle>, include_needle: bool, offset: i64) -> Self {
         let needle = needle.into();
         let mut offset = offset;
@@ -341,6 +359,11 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `before($needle, $includeNeedle, $offset)`.
+    #[must_use]
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn before(&self, needle: impl Into<Needle>, include_needle: bool, offset: i64) -> Self {
         let needle = needle.into();
         let mut found: Option<(usize, &[u8])> = None;
@@ -361,6 +384,11 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `beforeLast($needle, $includeNeedle, $offset)`.
+    #[must_use]
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn before_last(&self, needle: impl Into<Needle>, include_needle: bool, offset: i64) -> Self {
         let needle = needle.into();
         let mut offset = offset;
@@ -384,6 +412,7 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
 
     /// `collapseWhitespace()`: every run of spaces, tabs, CRs, LFs and form
     /// feeds becomes one space, then those are trimmed.
+    #[must_use]
     fn collapse_whitespace(&self) -> Self {
         let ws = |b: u8| matches!(b, b' ' | b'\n' | b'\r' | b'\t' | 0x0C);
         let mut out = Vec::with_capacity(self.as_bytes().len());
@@ -435,6 +464,10 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `ensureStart($prefix)`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn ensure_start(&self, prefix: impl AsRef<[u8]>) -> Result<Self> {
         let prefix = Self::create(prefix.as_ref())?;
         if !self.starts_with_str(prefix.as_bytes()) {
@@ -468,6 +501,10 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `indexOfLast($needle, $offset)`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn index_of_last(&self, needle: impl Into<Needle>, offset: i64) -> Option<usize> {
         match needle.into() {
             Needle::One(n) => self.index_of_last_str(&n, offset),
@@ -566,6 +603,10 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `AbstractString::split()` with flags: `preg_split()`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn preg_split(&self, delimiter: &[u8], limit: i64, flags: i64) -> Result<OffsetChunks<Self>> {
         let mut pattern = delimiter.to_vec();
         if Self::UNICODE {
@@ -657,6 +698,10 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `trimSuffix($suffix)`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn trim_suffix(&self, suffix: impl Into<Needle>) -> Result<Self> {
         Ok(match suffix.into() {
             Needle::Many(ss) => {
@@ -684,6 +729,10 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
     }
 
     /// `truncate($length, $ellipsis, $cut)`.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn truncate(
         &self,
         length: i64,
@@ -732,6 +781,10 @@ pub trait AbstractString: Sized + Clone + PartialEq + std::fmt::Debug {
 
     /// `wordwrap($width, $break, $cut)`: PHP's `wordwrap()` run on a mask
     /// of the string's characters (`chunk()`), so no character is split.
+    #[expect(
+        clippy::cast_possible_wrap,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     fn wordwrap(&self, width: i64, brk: impl AsRef<[u8]>, cut: bool) -> Result<Self> {
         let brk = brk.as_ref();
         let lines = if brk.is_empty() {

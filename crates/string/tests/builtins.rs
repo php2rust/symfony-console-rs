@@ -8,6 +8,13 @@
 //! Windows-1252 / windows-1250 code pages.
 //!
 //! Upstream: none
+#![allow(
+    clippy::cast_possible_truncation,
+    clippy::cast_sign_loss,
+    clippy::format_collect,
+    clippy::many_single_char_names,
+    reason = "test code ports PHPUnit tests and helpers as they are"
+)]
 
 use serde_json::Value as Json;
 use symfony_string::intl::{self, Form};

@@ -2,6 +2,10 @@
 //! 72.1 and PCRE2 10.44 (tests/data/unicode.json, `scripts/record.sh string`).
 //!
 //! Upstream: none
+#![allow(
+    clippy::cast_possible_truncation,
+    reason = "test code ports PHPUnit tests and helpers as they are"
+)]
 
 use serde_json::Value as Json;
 use symfony_string::unicode_string::pcre_graphemes;

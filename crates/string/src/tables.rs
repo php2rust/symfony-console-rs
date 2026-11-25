@@ -5,6 +5,7 @@
 //! `EXTPICT`: `\p{ExtPict}` as the oracle's PCRE2 10.44 2024-06-07 matches it.
 //!
 //! Upstream: symfony/string Resources/data/wcswidth_table_wide.php Resources/data/wcswidth_table_zero.php
+#![expect(clippy::doc_markdown, reason = "the Upstream line lists file paths")]
 
 pub(crate) const WIDE: &[(u32, u32)] = &[
     (0x1100, 0x115F),

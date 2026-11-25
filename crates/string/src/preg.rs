@@ -180,6 +180,11 @@ impl Regex {
 
     /// `preg_split($pattern, $subject, $limit, $flags)`: the pieces, each
     /// with its byte offset.
+    #[expect(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+    )]
     pub fn split(&self, subject: &[u8], limit: i64, flags: i64) -> Result<Vec<(Vec<u8>, usize)>> {
         self.check_subject(subject, "Splitting")?;
         let no_empty = flags & SPLIT_NO_EMPTY != 0;
@@ -276,6 +281,10 @@ fn expand(replacement: &[u8], groups: &[Option<&[u8]>]) -> Vec<u8> {
     out
 }
 
+#[expect(
+    clippy::cast_possible_wrap,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 fn group_value(subject: &[u8], group: Option<(usize, usize)>, offset_capture: bool) -> Value {
     let text = match group {
         Some((s, e)) => Value::string(subject[s..e].to_vec()),
@@ -290,6 +299,10 @@ fn group_value(subject: &[u8], group: Option<(usize, usize)>, offset_capture: bo
     Value::Array(pair)
 }
 
+#[expect(
+    clippy::cast_possible_wrap,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 fn groups_array(subject: &[u8], groups: &Groups, offset_capture: bool) -> PhpArray {
     let mut array = PhpArray::new();
     for (i, g) in groups.iter().enumerate() {
@@ -301,6 +314,12 @@ fn groups_array(subject: &[u8], groups: &Groups, offset_capture: bool) -> PhpArr
 /// `preg_match()` or, with `PREG_PATTERN_ORDER` or `PREG_SET_ORDER` in
 /// `flags`, `preg_match_all()`, always with `PREG_UNMATCHED_AS_NULL`
 /// (symfony/string adds it): the `$matches` array.
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_sign_loss,
+    reason = "PHP's int and float conversions, offsets and lengths, as upstream"
+)]
 pub fn matches(regex: &Regex, subject: &[u8], flags: i64, offset: i64) -> Result<Value> {
     regex.check_subject(subject, "Matching")?;
     let offset_capture = flags & OFFSET_CAPTURE != 0;

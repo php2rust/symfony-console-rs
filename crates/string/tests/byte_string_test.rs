@@ -4,6 +4,10 @@
 //!
 //! Upstream: symfony/string Tests/ByteStringTest.php
 #![allow(non_snake_case)]
+#![allow(
+    clippy::cast_possible_truncation,
+    reason = "test code ports PHPUnit tests and helpers as they are"
+)]
 
 mod common;
 
