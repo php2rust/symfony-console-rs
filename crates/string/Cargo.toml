@@ -10,11 +10,11 @@ description = "Port of the symfony/string component"
 getrandom = "0.4"
 unicode-normalization = "0.1"
 unicode-segmentation = "1.12"
-php-pcre = { path = "../php-pcre" }
-php-value = { path = "../php-value" }
+php-pcre = { workspace = true }
+php-value = { workspace = true }
 
 [dev-dependencies]
-php-value = { path = "../php-value", features = ["vectors"] }
+php-value = { workspace = true, features = ["vectors"] }
 serde_json = "1.0.154"
 
 [lints]
