@@ -1,8 +1,8 @@
 MIT License
 
-Copyright (c) 2026 symfony-rs contributors
+Copyright (c) 2026 php2rust-symfony-console contributors
+Portions moved from symfony-rs, copyright (c) 2026 symfony-rs contributors
 Portions derived from Symfony, copyright (c) 2004-present Fabien Potencier
-Portions derived from symfony/demo, copyright (c) 2015-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

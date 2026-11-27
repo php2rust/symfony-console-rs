@@ -1,10 +1,11 @@
-# Symfony Console (M1-B subset)
+# Symfony Console (subset)
 
-Private workspace crate: the parts of `symfony/console` v8.1.9 (`630e7419`)
-that the Yaml and Dotenv commands use (PLAN.md, M1-B). MIT; Symfony source
-and tests copyright Fabien Potencier. Unofficial, not affiliated with or
-endorsed by Symfony. The rest of Console is M7 work; its manifest rows stay
-`pending`.
+A port of parts of `symfony/console` v8.1.9 (`630e7419`): first the parts
+that the symfony-rs Yaml and Dotenv commands use, then what the Doctrine ORM
+console commands need. MIT; Symfony source and tests copyright Fabien
+Potencier. Unofficial, not affiliated with or endorsed by Symfony. The rest
+of Console is not ported yet. "PLAN.md" and milestone names (M1-B, M7) below
+refer to the symfony-rs plan, where this crate came from.
 
 | Contract | Source | Evidence |
 |---|---|---|
