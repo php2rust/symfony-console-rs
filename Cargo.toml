@@ -10,12 +10,12 @@ resolver = "3"
 # code. To work on several repositories, override a git source with a local
 # path in an uncommitted .cargo/config.toml.
 [workspace.dependencies]
-php-value = { package = "php2rust-value", git = "https://github.com/php2rust/compatibility-tools-rs", rev = "4585a15ed0263257317cdf818ebcad7ed7542db8" }
-php-pcre = { package = "php2rust-regex", git = "https://github.com/php2rust/compatibility-tools-rs", rev = "4585a15ed0263257317cdf818ebcad7ed7542db8" }
+php-value = { package = "php2rust-value", git = "https://github.com/php2rust/compatibility-tools", rev = "4585a15ed0263257317cdf818ebcad7ed7542db8" }
+php-pcre = { package = "php2rust-regex", git = "https://github.com/php2rust/compatibility-tools", rev = "4585a15ed0263257317cdf818ebcad7ed7542db8" }
 symfony-deprecation-contracts = { package = "php2rust-symfony-deprecation-contracts", git = "https://github.com/php2rust/symfony-deprecation-contracts-rs", rev = "2089fa1b805329c4e5f0794d51521b5df0a4528c" }
 
 # Lints for every member (`[lints] workspace = true`), the same rule set as
-# symfony-rs and compatibility-tools-rs.
+# symfony-rs and compatibility-tools.
 [workspace.lints.clippy]
 all = { level = "warn", priority = -1 }
 pedantic = { level = "warn", priority = -1 }

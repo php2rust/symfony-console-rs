@@ -75,7 +75,7 @@ checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
 [[package]]
 name = "php2rust-regex"
 version = "0.1.0"
-source = "git+https://github.com/php2rust/compatibility-tools-rs?rev=4585a15ed0263257317cdf818ebcad7ed7542db8#4585a15ed0263257317cdf818ebcad7ed7542db8"
+source = "git+https://github.com/php2rust/compatibility-tools?rev=4585a15ed0263257317cdf818ebcad7ed7542db8#4585a15ed0263257317cdf818ebcad7ed7542db8"
 dependencies = [
  "fancy-regex",
 ]
@@ -111,7 +111,7 @@ dependencies = [
 [[package]]
 name = "php2rust-value"
 version = "0.1.0"
-source = "git+https://github.com/php2rust/compatibility-tools-rs?rev=4585a15ed0263257317cdf818ebcad7ed7542db8#4585a15ed0263257317cdf818ebcad7ed7542db8"
+source = "git+https://github.com/php2rust/compatibility-tools?rev=4585a15ed0263257317cdf818ebcad7ed7542db8#4585a15ed0263257317cdf818ebcad7ed7542db8"
 dependencies = [
  "serde_json",
 ]
