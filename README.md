@@ -13,7 +13,7 @@ Part of the php2rust project. The crates came from
 | [php2rust-symfony-console](crates/php2rust-symfony-console/README.md) | symfony/console v8.1.9 | Formatter, input, output, commands, the application's registry, tables, SymfonyStyle, the testers |
 | [php2rust-symfony-string](crates/php2rust-symfony-string/README.md) | symfony/string v8.1.10 | ByteString, CodePointString, UnicodeString, LazyString, the inflectors |
 
-Dependencies: php2rust/compatibility-tools-rs (PHP values and PCRE) and
+Dependencies: php2rust/compatibility-tools (PHP values and PCRE) and
 php2rust/symfony-deprecation-contracts-rs. This repository does not depend
 on symfony-rs.
 
