@@ -1,0 +1,175 @@
+# symfony/console at 630e74196a2635ec0f06c12bd3fb47cfedf85157: upstream file	classes	code lines	status	rust files
+Application.php	Application	980	ported	crates/php2rust-symfony-console/src/application.rs
+ArgumentResolver/ArgumentResolver.php	ArgumentResolver	121	pending	
+ArgumentResolver/ArgumentResolverInterface.php	ArgumentResolverInterface	7	pending	
+ArgumentResolver/Exception/NearMissValueResolverException.php	NearMissValueResolverException	4	pending	
+ArgumentResolver/Exception/ResolverNotFoundException.php	ResolverNotFoundException	17	pending	
+ArgumentResolver/TraceableArgumentResolver.php	TraceableArgumentResolver	20	pending	
+ArgumentResolver/ValueResolver/BackedEnumValueResolver.php	BackedEnumValueResolver	56	pending	
+ArgumentResolver/ValueResolver/BuiltinTypeValueResolver.php	BuiltinTypeValueResolver	54	pending	
+ArgumentResolver/ValueResolver/DateTimeValueResolver.php	DateTimeValueResolver	96	pending	
+ArgumentResolver/ValueResolver/DefaultValueResolver.php	DefaultValueResolver	16	pending	
+ArgumentResolver/ValueResolver/InputFileValueResolver.php	InputFileValueResolver	36	pending	
+ArgumentResolver/ValueResolver/MapInputValueResolver.php	MapInputValueResolver	88	pending	
+ArgumentResolver/ValueResolver/ServiceValueResolver.php	ServiceValueResolver	51	pending	
+ArgumentResolver/ValueResolver/TraceableValueResolver.php	TraceableValueResolver	22	pending	
+ArgumentResolver/ValueResolver/UidValueResolver.php	UidValueResolver	55	pending	
+ArgumentResolver/ValueResolver/ValueResolverInterface.php	ValueResolverInterface	7	pending	
+ArgumentResolver/ValueResolver/VariadicValueResolver.php	VariadicValueResolver	29	pending	
+Attribute/Argument.php	Argument	69	pending	
+Attribute/AsCommand.php	AsCommand	23	ported	crates/php2rust-symfony-console/src/attribute/as_command.rs
+Attribute/AsTargetedValueResolver.php	AsTargetedValueResolver	8	pending	
+Attribute/Ask.php	Ask	124	pending	
+Attribute/AskChoice.php	AskChoice	86	pending	
+Attribute/Interact.php	Interact	25	pending	
+Attribute/InteractiveAttributeInterface.php	InteractiveAttributeInterface	5	pending	
+Attribute/MapDateTime.php	MapDateTime	14	pending	
+Attribute/MapInput.php	MapInput	155	pending	
+Attribute/Option.php	Option	99	pending	
+Attribute/Reflection/ReflectionMember.php	ReflectionMember	89	pending	
+Attribute/ValueResolver.php	ValueResolver	11	pending	
+CI/GithubActionReporter.php	GithubActionReporter	46	ported	crates/php2rust-symfony-console/src/ci/github_action_reporter.rs
+Color.php	Color	101	ported	crates/php2rust-symfony-console/src/color.rs
+Command/Command.php	Command	374	ported	crates/php2rust-symfony-console/src/command/command.rs
+Command/CompleteCommand.php	CompleteCommand	160	ported	crates/php2rust-symfony-console/src/command/default_commands.rs
+Command/DumpCompletionCommand.php	DumpCompletionCommand	112	ported	crates/php2rust-symfony-console/src/command/default_commands.rs
+Command/HelpCommand.php	HelpCommand	51	ported	crates/php2rust-symfony-console/src/command/default_commands.rs
+Command/InvokableCommand.php	InvokableCommand	182	ported	crates/php2rust-symfony-console/src/command/command.rs
+Command/LazyCommand.php	LazyCommand	142	pending	
+Command/ListCommand.php	ListCommand	52	ported	crates/php2rust-symfony-console/src/command/default_commands.rs
+Command/LockableTrait.php	LockableTrait	51	pending	
+Command/SignalableCommandInterface.php	SignalableCommandInterface	6	pending	
+Command/TraceableCommand.php	TraceableCommand	251	pending	
+CommandLoader/CommandLoaderInterface.php	CommandLoaderInterface	9	pending	
+CommandLoader/ContainerCommandLoader.php	ContainerCommandLoader	27	pending	
+CommandLoader/FactoryCommandLoader.php	FactoryCommandLoader	26	pending	
+Completion/CompletionInput.php	CompletionInput	147	ported	crates/php2rust-symfony-console/src/completion/completion_input.rs
+Completion/CompletionSuggestions.php	CompletionSuggestions	39	ported	crates/php2rust-symfony-console/src/completion/suggestion.rs
+Completion/Output/BashCompletionOutput.php	BashCompletionOutput	17	pending	
+Completion/Output/CompletionOutputInterface.php	CompletionOutputInterface	7	pending	
+Completion/Output/FishCompletionOutput.php	FishCompletionOutput	20	pending	
+Completion/Output/ZshCompletionOutput.php	ZshCompletionOutput	20	pending	
+Completion/Suggestion.php	Suggestion	21	ported	crates/php2rust-symfony-console/src/completion/suggestion.rs
+ConsoleBundle.php	ConsoleBundle	73	pending	
+ConsoleEvents.php	ConsoleEvents	21	pending	
+Cursor.php	Cursor	96	pending	
+DataCollector/CommandDataCollector.php	CommandDataCollector	167	pending	
+Debug/CliRequest.php	CliRequest	43	pending	
+DependencyInjection/AddConsoleCommandPass.php	AddConsoleCommandPass	171	pending	
+DependencyInjection/ConsoleArgumentValueResolverPass.php	ConsoleArgumentValueResolverPass	46	pending	
+DependencyInjection/RegisterCommandArgumentLocatorsPass.php	RegisterCommandArgumentLocatorsPass	140	pending	
+DependencyInjection/RemoveEmptyCommandArgumentLocatorsPass.php	RemoveEmptyCommandArgumentLocatorsPass	34	pending	
+Descriptor/ApplicationDescription.php	ApplicationDescription	85	pending	
+Descriptor/Descriptor.php	Descriptor	33	pending	
+Descriptor/DescriptorInterface.php	DescriptorInterface	6	pending	
+Descriptor/JsonDescriptor.php	JsonDescriptor	122	pending	
+Descriptor/MarkdownDescriptor.php	MarkdownDescriptor	130	pending	
+Descriptor/ReStructuredTextDescriptor.php	ReStructuredTextDescriptor	218	pending	
+Descriptor/TextDescriptor.php	TextDescriptor	235	pending	
+Descriptor/XmlDescriptor.php	XmlDescriptor	165	pending	
+Event/ConsoleAlarmEvent.php	ConsoleAlarmEvent	30	pending	
+Event/ConsoleCommandEvent.php	ConsoleCommandEvent	18	pending	
+Event/ConsoleErrorEvent.php	ConsoleErrorEvent	34	pending	
+Event/ConsoleEvent.php	ConsoleEvent	26	pending	
+Event/ConsoleSignalEvent.php	ConsoleSignalEvent	35	pending	
+Event/ConsoleTerminateEvent.php	ConsoleTerminateEvent	28	pending	
+Event/QuestionAnsweredEvent.php	QuestionAnsweredEvent	23	pending	
+EventListener/ErrorListener.php	ErrorListener	57	pending	
+EventListener/ValidateQuestionInputListener.php	ValidateQuestionInputListener	23	pending	
+Exception/CommandNotFoundException.php	CommandNotFoundException	16	ported	crates/php2rust-symfony-console/src/exception.rs
+Exception/ExceptionInterface.php	ExceptionInterface	4	ported	crates/php2rust-symfony-console/src/exception.rs
+Exception/InputValidationFailedException.php	InputValidationFailedException	15	pending	
+Exception/InvalidArgumentException.php	InvalidArgumentException	16	ported	crates/php2rust-symfony-console/src/exception.rs
+Exception/InvalidFileException.php	InvalidFileException	11	pending	
+Exception/InvalidOptionException.php	InvalidOptionException	16	ported	crates/php2rust-symfony-console/src/exception.rs
+Exception/LogicException.php	LogicException	4	ported	crates/php2rust-symfony-console/src/exception.rs
+Exception/MissingInputException.php	MissingInputException	4	pending	
+Exception/NamespaceNotFoundException.php	NamespaceNotFoundException	4	ported	crates/php2rust-symfony-console/src/exception.rs
+Exception/RunCommandFailedException.php	RunCommandFailedException	13	pending	
+Exception/RuntimeException.php	RuntimeException	4	ported	crates/php2rust-symfony-console/src/exception.rs
+Formatter/NullOutputFormatter.php	NullOutputFormatter	27	pending	
+Formatter/NullOutputFormatterStyle.php	NullOutputFormatterStyle	23	pending	
+Formatter/OutputFormatter.php	OutputFormatter	192	ported	crates/php2rust-symfony-console/src/formatter/output_formatter.rs
+Formatter/OutputFormatterInterface.php	OutputFormatterInterface	10	ported	crates/php2rust-symfony-console/src/formatter/output_formatter.rs
+Formatter/OutputFormatterStyle.php	OutputFormatterStyle	54	ported	crates/php2rust-symfony-console/src/formatter/output_formatter_style.rs
+Formatter/OutputFormatterStyleInterface.php	OutputFormatterStyleInterface	10	ported	crates/php2rust-symfony-console/src/formatter/output_formatter_style.rs
+Formatter/OutputFormatterStyleStack.php	OutputFormatterStyleStack	53	ported	crates/php2rust-symfony-console/src/formatter/output_formatter_style_stack.rs
+Formatter/WrappableOutputFormatterInterface.php	WrappableOutputFormatterInterface	5	ported	crates/php2rust-symfony-console/src/formatter/output_formatter.rs
+Helper/DebugFormatterHelper.php	DebugFormatterHelper	56	pending	
+Helper/DescriptorHelper.php	DescriptorHelper	48	pending	
+Helper/Dumper.php	Dumper	34	pending	
+Helper/FileInputHelper.php	FileInputHelper	178	pending	
+Helper/FormatterHelper.php	FormatterHelper	45	ported	crates/php2rust-symfony-console/src/helper/formatter_helper.rs
+Helper/Helper.php	Helper	113	ported	crates/php2rust-symfony-console/src/helper/helper.rs
+Helper/HelperInterface.php	HelperInterface	7	ported	crates/php2rust-symfony-console/src/helper/helper_set.rs
+Helper/HelperSet.php	HelperSet	35	ported	crates/php2rust-symfony-console/src/helper/helper_set.rs
+Helper/InputAwareHelper.php	InputAwareHelper	11	pending	
+Helper/OutputWrapper.php	OutputWrapper	30	ported	crates/php2rust-symfony-console/src/helper/output_wrapper.rs
+Helper/ProcessHelper.php	ProcessHelper	74	pending	
+Helper/ProgressBar.php	ProgressBar	508	pending	
+Helper/ProgressIndicator.php	ProgressIndicator	154	pending	
+Helper/QuestionHelper.php	QuestionHelper	456	pending	
+Helper/SymfonyQuestionHelper.php	SymfonyQuestionHelper	63	pending	
+Helper/Table.php	Table	712	ported	crates/php2rust-symfony-console/src/helper/table.rs
+Helper/TableCell.php	TableCell	38	ported	crates/php2rust-symfony-console/src/helper/table_cell.rs
+Helper/TableCellStyle.php	TableCellStyle	53	ported	crates/php2rust-symfony-console/src/helper/table_cell.rs
+Helper/TableRows.php	TableRows	12	ported	crates/php2rust-symfony-console/src/helper/table.rs
+Helper/TableSeparator.php	TableSeparator	8	ported	crates/php2rust-symfony-console/src/helper/table_cell.rs
+Helper/TableStyle.php	TableStyle	180	ported	crates/php2rust-symfony-console/src/helper/table_style.rs
+Helper/TerminalInputHelper.php	TerminalInputHelper	85	pending	
+Helper/TreeHelper.php	TreeHelper	68	pending	
+Helper/TreeNode.php	TreeNode	67	pending	
+Helper/TreeStyle.php	TreeStyle	50	pending	
+Input/ArgvInput.php	ArgvInput	254	ported	crates/php2rust-symfony-console/src/input/input.rs
+Input/ArrayInput.php	ArrayInput	124	ported	crates/php2rust-symfony-console/src/input/input.rs
+Input/File/InputFile.php	InputFile	182	pending	
+Input/Input.php	Input	136	ported	crates/php2rust-symfony-console/src/input/input.rs
+Input/InputArgument.php	InputArgument	80	ported	crates/php2rust-symfony-console/src/input/input_argument.rs
+Input/InputAwareInterface.php	InputAwareInterface	5	pending	
+Input/InputDefinition.php	InputDefinition	230	ported	crates/php2rust-symfony-console/src/input/input_definition.rs
+Input/InputInterface.php	InputInterface	22	ported	crates/php2rust-symfony-console/src/input/input.rs
+Input/InputOption.php	InputOption	146	ported	crates/php2rust-symfony-console/src/input/input_option.rs
+Input/RawInputInterface.php	RawInputInterface	7	pending	
+Input/StreamableInputInterface.php	StreamableInputInterface	6	pending	
+Input/StringInput.php	StringInput	45	ported	crates/php2rust-symfony-console/src/input/string_input.rs
+Interaction/Interaction.php	Interaction	29	pending	
+Logger/ConsoleLogger.php	ConsoleLogger	79	pending	
+Messenger/RunCommandContext.php	RunCommandContext	10	pending	
+Messenger/RunCommandMessage.php	RunCommandMessage	15	pending	
+Messenger/RunCommandMessageHandler.php	RunCommandMessageHandler	35	pending	
+Output/AnsiColorMode.php	AnsiColorMode	55	ported	crates/php2rust-symfony-console/src/output/ansi_color_mode.rs
+Output/BufferedOutput.php	BufferedOutput	18	ported	crates/php2rust-symfony-console/src/output/output.rs
+Output/CombinedOutput.php	CombinedOutput	93	pending	
+Output/ConsoleOutput.php	ConsoleOutput	90	pending	
+Output/ConsoleOutputInterface.php	ConsoleOutputInterface	7	pending	
+Output/ConsoleSectionOutput.php	ConsoleSectionOutput	153	pending	
+Output/NullOutput.php	NullOutput	54	ported	crates/php2rust-symfony-console/src/output/null_output.rs
+Output/Output.php	Output	89	ported	crates/php2rust-symfony-console/src/output/output.rs
+Output/OutputInterface.php	OutputInterface	27	ported	crates/php2rust-symfony-console/src/output/output.rs
+Output/StreamOutput.php	StreamOutput	54	ported	crates/php2rust-symfony-console/src/output/output.rs
+Output/TestOutput.php	TestOutput	125	pending	
+Output/TrimmedBufferOutput.php	TrimmedBufferOutput	30	ported	crates/php2rust-symfony-console/src/output/trimmed_buffer_output.rs
+Question/ChoiceQuestion.php	ChoiceQuestion	101	pending	
+Question/ConfirmationQuestion.php	ConfirmationQuestion	27	pending	
+Question/FileQuestion.php	FileQuestion	24	pending	
+Question/Question.php	Question	153	pending	
+Resources/config/console.php	-	65	pending	
+SignalRegistry/SignalMap.php	SignalMap	18	pending	
+SignalRegistry/SignalRegistry.php	SignalRegistry	68	pending	
+SingleCommandApplication.php	SingleCommandApplication	38	pending	
+Style/OutputStyle.php	OutputStyle	79	ported	crates/php2rust-symfony-console/src/style/symfony_style.rs
+Style/StyleInterface.php	StyleInterface	22	ported	crates/php2rust-symfony-console/src/style/symfony_style.rs
+Style/SymfonyStyle.php	SymfonyStyle	425	ported	crates/php2rust-symfony-console/src/style/symfony_style.rs
+Terminal.php	Terminal	180	ported	crates/php2rust-symfony-console/src/terminal.rs
+Terminal/Image/ITerm2Protocol.php	ITerm2Protocol	59	pending	
+Terminal/Image/ImageProtocolInterface.php	ImageProtocolInterface	8	pending	
+Terminal/Image/KittyGraphicsProtocol.php	KittyGraphicsProtocol	100	pending	
+Tester/ApplicationTester.php	ApplicationTester	42	pending	
+Tester/CommandCompletionTester.php	CommandCompletionTester	28	ported	crates/php2rust-symfony-console/src/tester/command_completion_tester.rs
+Tester/CommandTester.php	CommandTester	68	ported	crates/php2rust-symfony-console/src/tester/command_tester.rs
+Tester/ConsoleAssertionsTrait.php	ConsoleAssertionsTrait	41	pending	
+Tester/Constraint/CommandFailed.php	CommandFailed	26	pending	
+Tester/Constraint/CommandIsInvalid.php	CommandIsInvalid	26	pending	
+Tester/Constraint/CommandIsSuccessful.php	CommandIsSuccessful	26	pending	
+Tester/ExecutionResult.php	ExecutionResult	55	pending	
+Tester/TesterTrait.php	TesterTrait	110	ported	crates/php2rust-symfony-console/src/tester/command_tester.rs

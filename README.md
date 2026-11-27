@@ -36,3 +36,10 @@ cargo fmt --all --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
 ```
+
+## Migration evidence
+
+The `parity/` files preserve the Symfony Console test and class inventory and
+source map from symfony-rs at the time of extraction. The maps use the paths
+in this repository; they are a historical snapshot, not an automated parity
+check. The original PHP oracle recorders remain in symfony-rs history.
