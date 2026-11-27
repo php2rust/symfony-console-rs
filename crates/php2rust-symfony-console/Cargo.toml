@@ -1,0 +1,23 @@
+[package]
+name = "php2rust-symfony-console"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+description = "Port of symfony/console (a subset: formatter, input, output, commands, application registry, tables, SymfonyStyle, testers)"
+
+[dependencies]
+php-value = { workspace = true }
+symfony-string = { package = "php2rust-symfony-string", path = "../php2rust-symfony-string" }
+symfony-deprecation-contracts = { workspace = true }
+fancy-regex = "0.20.2"
+
+[dev-dependencies]
+php-value = { workspace = true, features = ["vectors"] }
+serde_json = "1.0.154"
+
+[lib]
+name = "symfony_console"
+
+[lints]
+workspace = true

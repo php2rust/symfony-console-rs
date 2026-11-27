@@ -1,6 +1,6 @@
 # Symfony String
 
-Private workspace crate: a port of `symfony/string` v8.1.10 (`6c611097`):
+A port of `symfony/string` v8.1.10 (`6c611097`):
 ByteString, CodePointString and UnicodeString with what AbstractString and
 AbstractUnicodeString give them, the `u()`, `b()` and `s()` functions, the
 PHP functions they call, LazyString, and the English, French and Spanish

@@ -1,0 +1,42 @@
+[workspace]
+members = [
+    "crates/php2rust-symfony-console",
+    "crates/php2rust-symfony-string",
+]
+resolver = "3"
+
+# Git dependencies pinned to a rev (no crates.io). The package aliases keep
+# the `php_value`, `php_pcre` and `symfony_deprecation_contracts` names in
+# code. To work on several repositories, override a git source with a local
+# path in an uncommitted .cargo/config.toml.
+[workspace.dependencies]
+php-value = { package = "php2rust-value", git = "https://github.com/php2rust/compatibility-tools-rs", rev = "4585a15ed0263257317cdf818ebcad7ed7542db8" }
+php-pcre = { package = "php2rust-regex", git = "https://github.com/php2rust/compatibility-tools-rs", rev = "4585a15ed0263257317cdf818ebcad7ed7542db8" }
+symfony-deprecation-contracts = { package = "php2rust-symfony-deprecation-contracts", git = "https://github.com/php2rust/symfony-deprecation-contracts-rs", rev = "2089fa1b805329c4e5f0794d51521b5df0a4528c" }
+
+# Lints for every member (`[lints] workspace = true`), the same rule set as
+# symfony-rs and compatibility-tools-rs.
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+# Pedantic lints that only add noise to a port.
+module_name_repetitions = "allow"
+must_use_candidate = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+# AGENTS.md rules: no panics on external input, no stubs or debug
+# output left behind. Tests may unwrap (clippy.toml).
+unwrap_used = "warn"
+expect_used = "warn"
+todo = "warn"
+unimplemented = "warn"
+dbg_macro = "deny"
+print_stdout = "warn"
+await_holding_lock = "deny"
+
+# Keep source locations for normal development without full debug symbols.
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.test]
+debug = "line-tables-only"
